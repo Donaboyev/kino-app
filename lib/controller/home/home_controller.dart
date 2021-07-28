@@ -16,6 +16,9 @@ class HomeController extends BaseController {
   List<Genre> _genres = [];
   List<Movie> _moviesByGenre = [];
   List<Person> _people = [];
+  RxBool _isPageLoading = false.obs;
+  RxBool _hasNext = true.obs;
+  int _page = 1;
 
   @override
   void onInit() {
@@ -26,12 +29,27 @@ class HomeController extends BaseController {
   }
 
   Future<void> getNowPlayingMovies() async {
-    setLoading(true);
-    final result =
-        await repository.getNowPlayingMovies(apiKey: Constants.API_KEY);
+    print('===========================> page: $_page');
+    if (!_hasNext.value) {
+      return;
+    }
+    if (_page == 1) {
+      setLoading(true);
+    } else {
+      _isPageLoading.value = true;
+    }
+    final result = await repository.getNowPlayingMovies(
+      apiKey: Constants.API_KEY,
+      page: _page,
+    );
+    _isPageLoading.value = false;
     setLoading(false);
     if (result is MovieResponse) {
-      _nowPlayingMovies = result.movies;
+      if (result.movies.isEmpty) {
+        _hasNext.value = false;
+      }
+      _page++;
+      _nowPlayingMovies.addAll(result.movies);
       update();
     } else {
       print('===================> error: $result');
@@ -83,4 +101,6 @@ class HomeController extends BaseController {
   List<Movie> get moviesByGenre => _moviesByGenre;
 
   List<Person> get people => _people;
+
+  RxBool get isPageLoading => _isPageLoading;
 }

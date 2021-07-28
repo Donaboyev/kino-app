@@ -49,7 +49,10 @@ abstract class ApiClient {
   }
 
   @GET('movie/now_playing')
-  Future<MovieResponse> getNowPlayingMovies(@Query('api_key') String apiKey);
+  Future<MovieResponse> getNowPlayingMovies(
+    @Query('api_key') String apiKey,
+    @Query('page') int page,
+  );
 
   @GET('discover/movie')
   Future<MovieResponse> getMoviesByGenre(

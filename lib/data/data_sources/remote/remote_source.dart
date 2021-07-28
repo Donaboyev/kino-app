@@ -14,11 +14,13 @@ class RemoteSource {
 
   RemoteSource({@required this.apiClient}) : assert(apiClient != null);
 
-  Future<ResponseHandler<MovieResponse>> getNowPlayingMovies(
-      {@required String apiKey}) async {
+  Future<ResponseHandler<MovieResponse>> getNowPlayingMovies({
+    @required String apiKey,
+    @required int page,
+  }) async {
     MovieResponse response;
     try {
-      response = await apiClient.getNowPlayingMovies(apiKey);
+      response = await apiClient.getNowPlayingMovies(apiKey, page);
     } catch (error, stacktrace) {
       print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');

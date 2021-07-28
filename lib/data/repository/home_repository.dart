@@ -7,8 +7,12 @@ class HomeRepository {
   const HomeRepository({@required this.remoteSource})
       : assert(remoteSource != null);
 
-  Future<dynamic> getNowPlayingMovies({@required String apiKey}) async {
-    final response = await remoteSource.getNowPlayingMovies(apiKey: apiKey);
+  Future<dynamic> getNowPlayingMovies({
+    @required String apiKey,
+    @required int page,
+  }) async {
+    final response =
+        await remoteSource.getNowPlayingMovies(apiKey: apiKey, page: page);
     if (response.data != null) {
       return response.data;
     }
