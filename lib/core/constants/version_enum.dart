@@ -1,0 +1,4 @@
+enum Version {
+  LAZY,
+  WAIT,
+}
