@@ -6,23 +6,12 @@ import 'package:kino_app/controller/home/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
 
-class NowPlayingWidget extends StatelessWidget {
+class DiscoverWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       builder: (homeController) => Column(
         children: [
-          SizedBox(height: 12),
-          Container(
-            child: Text(
-              'Now playing',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: clrBlack,
-              ),
-            ),
-          ),
           SizedBox(height: 12),
           homeController.isLoading.value
               ? Center(
@@ -35,7 +24,7 @@ class NowPlayingWidget extends StatelessWidget {
                       if (scrollNotification.metrics.pixels ==
                               scrollNotification.metrics.maxScrollExtent &&
                           scrollNotification is ScrollUpdateNotification) {
-                        homeController.getNowPlayingMovies();
+                        homeController.getMoviesByGenre();
                         return true;
                       }
                       return false;
@@ -49,10 +38,10 @@ class NowPlayingWidget extends StatelessWidget {
                           ),
                           scrollDirection: Axis.horizontal,
                           physics: BouncingScrollPhysics(),
-                          itemCount: homeController.nowPlayingMovies.length,
+                          controller: homeController.scrollController,
+                          itemCount: homeController.moviesByGenre.length,
                           itemBuilder: (context, index) {
-                            Movie movie =
-                                homeController.nowPlayingMovies[index];
+                            Movie movie = homeController.moviesByGenre[index];
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -131,7 +120,7 @@ class NowPlayingWidget extends StatelessWidget {
                         ),
                         Obx(
                           () => Visibility(
-                            visible: homeController.isNowPlayingLoading.value,
+                            visible: homeController.isDiscoverLoading.value,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8.0),
                               child: Align(

@@ -1,5 +1,6 @@
 class MovieResponse {
   List<Movie> movies;
+  int totalPages;
 
   MovieResponse({this.movies});
 
@@ -12,6 +13,7 @@ class MovieResponse {
     } else {
       movies = [];
     }
+    totalPages = json['total_pages'];
   }
 }
 

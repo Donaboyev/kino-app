@@ -1,7 +1,8 @@
 class PersonResponse {
   List<Person> people;
+  int totalPages;
 
-  PersonResponse({this.people});
+  PersonResponse({this.totalPages, this.people});
 
   PersonResponse.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
@@ -12,6 +13,7 @@ class PersonResponse {
     } else {
       people = [];
     }
+    totalPages = json['total_pages'];
   }
 }
 

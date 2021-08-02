@@ -14,6 +14,20 @@ class RemoteSource {
 
   RemoteSource({@required this.apiClient}) : assert(apiClient != null);
 
+  Future<ResponseHandler<MovieResponse>> getUpcomingMovies(
+      {@required String apiKey}) async {
+    MovieResponse response;
+    try {
+      response = await apiClient.getUpcomingMovies(apiKey);
+    } catch (error, stacktrace) {
+      print(
+          'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
+      return ResponseHandler()
+        ..setException(ServerError.withError(error: error));
+    }
+    return ResponseHandler()..data = response;
+  }
+
   Future<ResponseHandler<MovieResponse>> getNowPlayingMovies({
     @required String apiKey,
     @required int page,
@@ -30,11 +44,45 @@ class RemoteSource {
     return ResponseHandler()..data = response;
   }
 
-  Future<ResponseHandler<MovieResponse>> getMoviesByGenre(
-      {@required int genreId, @required String apiKey}) async {
+  Future<ResponseHandler<MovieResponse>> getTopRatedMovies({
+    @required String apiKey,
+    @required int page,
+  }) async {
     MovieResponse response;
     try {
-      response = await apiClient.getMoviesByGenre(genreId, apiKey);
+      response = await apiClient.getTopRatedMovies(apiKey, page);
+    } catch (error, stacktrace) {
+      print(
+          'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
+      return ResponseHandler()
+        ..setException(ServerError.withError(error: error));
+    }
+    return ResponseHandler()..data = response;
+  }
+
+  Future<ResponseHandler<MovieResponse>> getPopularMovies({
+    @required String apiKey,
+    @required int page,
+  }) async {
+    MovieResponse response;
+    try {
+      response = await apiClient.getPopularMovies(apiKey, page);
+    } catch (error, stacktrace) {
+      print(
+          'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
+      return ResponseHandler()
+        ..setException(ServerError.withError(error: error));
+    }
+    return ResponseHandler()..data = response;
+  }
+
+  Future<ResponseHandler<MovieResponse>> getMoviesByGenre(
+      {@required int genreId,
+      @required String apiKey,
+      @required int page}) async {
+    MovieResponse response;
+    try {
+      response = await apiClient.getMoviesByGenre(genreId, page, apiKey);
     } catch (error, stacktrace) {
       print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
@@ -59,10 +107,10 @@ class RemoteSource {
   }
 
   Future<ResponseHandler<PersonResponse>> getTrendingPersons(
-      {@required String apiKey}) async {
+      {@required String apiKey, @required int page}) async {
     PersonResponse response;
     try {
-      response = await apiClient.getTrendingPeople(apiKey);
+      response = await apiClient.getTrendingPeople(apiKey, page);
     } catch (error, stacktrace) {
       print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');

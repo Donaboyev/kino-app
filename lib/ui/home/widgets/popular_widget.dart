@@ -6,7 +6,7 @@ import 'package:kino_app/controller/home/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
 
-class NowPlayingWidget extends StatelessWidget {
+class PopularWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -15,7 +15,7 @@ class NowPlayingWidget extends StatelessWidget {
           SizedBox(height: 12),
           Container(
             child: Text(
-              'Now playing',
+              'Popular',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -35,7 +35,7 @@ class NowPlayingWidget extends StatelessWidget {
                       if (scrollNotification.metrics.pixels ==
                               scrollNotification.metrics.maxScrollExtent &&
                           scrollNotification is ScrollUpdateNotification) {
-                        homeController.getNowPlayingMovies();
+                        homeController.getPopularMovies();
                         return true;
                       }
                       return false;
@@ -49,10 +49,9 @@ class NowPlayingWidget extends StatelessWidget {
                           ),
                           scrollDirection: Axis.horizontal,
                           physics: BouncingScrollPhysics(),
-                          itemCount: homeController.nowPlayingMovies.length,
+                          itemCount: homeController.popularMovies.length,
                           itemBuilder: (context, index) {
-                            Movie movie =
-                                homeController.nowPlayingMovies[index];
+                            Movie movie = homeController.popularMovies[index];
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -131,7 +130,7 @@ class NowPlayingWidget extends StatelessWidget {
                         ),
                         Obx(
                           () => Visibility(
-                            visible: homeController.isNowPlayingLoading.value,
+                            visible: homeController.isPopularLoading.value,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8.0),
                               child: Align(

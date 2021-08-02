@@ -8,10 +8,13 @@ import 'package:kino_app/core/custom_widgets/modal_progress_hud.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/genre_response.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:kino_app/ui/home/widgets/discover_widget.dart';
 import 'package:kino_app/ui/home/widgets/genres_widget.dart';
 import 'package:kino_app/ui/home/widgets/home_banner_widget.dart';
 import 'package:kino_app/ui/home/widgets/now_playing_widget.dart';
 import 'package:kino_app/ui/home/widgets/people_widget.dart';
+import 'package:kino_app/ui/home/widgets/popular_widget.dart';
+import 'package:kino_app/ui/home/widgets/top_rated_widget.dart';
 
 class HomePage extends GetView<HomeController> {
   @override
@@ -22,7 +25,7 @@ class HomePage extends GetView<HomeController> {
           backgroundColor: clrTransparent,
           elevation: 0,
           title: Text(
-            'Movies-db'.toUpperCase(),
+            'Kino App'.toUpperCase(),
             style: Theme.of(context).textTheme.caption.copyWith(
                   color: clrBlack,
                   fontSize: 20,
@@ -49,7 +52,10 @@ class HomePage extends GetView<HomeController> {
                               children: [
                                 HomeBannerWidget(),
                                 GenresWidget(),
+                                DiscoverWidget(),
                                 NowPlayingWidget(),
+                                PopularWidget(),
+                                TopRatedWidget(),
                                 PeopleWidget(),
                               ],
                             ),

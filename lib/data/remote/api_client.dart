@@ -48,8 +48,23 @@ abstract class ApiClient {
     return _ApiClient(dio, baseUrl: baseUrl);
   }
 
+  @GET('movie/upcoming')
+  Future<MovieResponse> getUpcomingMovies(@Query('api_key') String apiKey);
+
   @GET('movie/now_playing')
   Future<MovieResponse> getNowPlayingMovies(
+    @Query('api_key') String apiKey,
+    @Query('page') int page,
+  );
+
+  @GET('movie/popular')
+  Future<MovieResponse> getPopularMovies(
+    @Query('api_key') String apiKey,
+    @Query('page') int page,
+  );
+
+  @GET('movie/top_rated')
+  Future<MovieResponse> getTopRatedMovies(
     @Query('api_key') String apiKey,
     @Query('page') int page,
   );
@@ -57,14 +72,18 @@ abstract class ApiClient {
   @GET('discover/movie')
   Future<MovieResponse> getMoviesByGenre(
     @Query('with_genres') int genreId,
+    @Query('page') int page,
     @Query('api_key') String apiKey,
   );
 
   @GET('genre/movie/list')
   Future<GenreResponse> getGenres(@Query('api_key') String apiKey);
 
-  @GET('trending/person/week')
-  Future<PersonResponse> getTrendingPeople(@Query('api_key') String apiKey);
+  @GET('person/popular')
+  Future<PersonResponse> getTrendingPeople(
+    @Query('api_key') String apiKey,
+    @Query('page') int page,
+  );
 
   @GET('movie/{movieId}')
   Future<MovieDetail> getMovieDetail(

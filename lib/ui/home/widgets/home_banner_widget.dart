@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/controller/home/home_controller.dart';
+import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
 
 class HomeBannerWidget extends StatelessWidget {
@@ -11,16 +12,16 @@ class HomeBannerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       builder: (homeController) => CarouselSlider.builder(
-        itemCount: homeController.nowPlayingMovies.length,
+        itemCount: homeController.upcomingMovies.length,
         itemBuilder: (context, itemIndex, pageViewIndex) {
-          Movie movie = homeController.nowPlayingMovies[itemIndex];
+          Movie movie = homeController.upcomingMovies[itemIndex];
           return Stack(
             alignment: Alignment.bottomLeft,
             children: [
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      'https://image.tmdb.org/t/p/original/${movie.backdropPath}',
+                      'https://image.tmdb.org/t/p/w780/${movie.backdropPath}',
                   height: Get.height / 3,
                   width: Get.width,
                   fit: BoxFit.cover,
@@ -29,14 +30,19 @@ class HomeBannerWidget extends StatelessWidget {
                     child: Text('error'),
                   ),
                 ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
-                ),
+                borderRadius: BorderRadius.circular(12),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  bottom: 15,
-                  left: 15,
+              Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
+                  ),
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [clrBlack, clrTransparent]),
                 ),
                 child: Text(
                   movie.title,
@@ -48,6 +54,18 @@ class HomeBannerWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+              Positioned.fill(
+                child: Material(
+                  color: clrTransparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    onTap: () {
+                      print(
+                          '======================> id: ${movie.id} name: ${movie.title}');
+                    },
+                  ),
+                ),
+              )
             ],
           );
         },
