@@ -23,7 +23,7 @@ class Movie {
   final String originalLanguage;
   final String originalTitle;
   final String overview;
-  final double popularity;
+  final num popularity;
   final String posterPath;
   final String releaseDate;
   final String title;

@@ -6,6 +6,8 @@ import 'package:kino_app/controller/home/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/data/model/response/genre_response.dart';
+import 'package:kino_app/ui/home/widgets/category_title_widget.dart';
+import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class GenresWidget extends GetView<HomeController> {
   @override
@@ -13,13 +15,12 @@ class GenresWidget extends GetView<HomeController> {
     return GetBuilder<HomeController>(
       builder: (homeController) => Column(
         children: [
-          SizedBox(height: 12),
-          Text(
-            'Discover',
-            style: styAppBarTitle,
+          CategoryTitleWidget(
+            title: 'Discover movies',
+            onTap: () {},
           ),
           homeController.isLoading.value
-              ? Center(child: CupertinoActivityIndicator())
+              ? Center(child: const NutsActivityIndicator())
               : SizedBox(
                   height: 45,
                   child: Align(
@@ -30,10 +31,11 @@ class GenresWidget extends GetView<HomeController> {
                         width: 5,
                       ),
                       scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 7),
+                      physics: const BouncingScrollPhysics(),
                       itemCount: homeController.genres.length,
                       itemBuilder: (context, index) {
-                        Genre genre = homeController.genres[index];
+                        final Genre genre = homeController.genres[index];
                         return Obx(
                           () => Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -46,10 +48,11 @@ class GenresWidget extends GetView<HomeController> {
                               fillColor:
                                   homeController.selectedGenreIndex.value ==
                                           index
-                                      ? clrBlack
-                                      : clrWhite,
+                                      ? clrPink
+                                      : clrMirage,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                               focusElevation: 0,
                               highlightElevation: 0,
                               child: Center(
@@ -61,7 +64,7 @@ class GenresWidget extends GetView<HomeController> {
                                     color: homeController
                                                 .selectedGenreIndex.value !=
                                             index
-                                        ? clrBlack
+                                        ? clrWhite
                                         : clrWhite,
                                   ),
                                 ),
@@ -78,32 +81,3 @@ class GenresWidget extends GetView<HomeController> {
     );
   }
 }
-/**Column(
-    children: <Widget>[
-    Container(
-    decoration: BoxDecoration(
-    border: Border.all(color: clrBlack),
-    borderRadius: BorderRadius.circular(25),
-    color: homeController
-    .selectedGenreIndex.value !=
-    index
-    ? clrWhite
-    : clrBlack,
-    ),
-    child: Text(
-    genre.name.toUpperCase(),
-    style: TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.bold,
-    color: homeController
-    .selectedGenreIndex
-    .value !=
-    index
-    ? clrBlack
-    : clrWhite,
-    ),
-    ),
-    ),
-    ],
-    ),
-    */

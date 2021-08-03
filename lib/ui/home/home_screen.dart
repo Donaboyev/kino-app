@@ -15,19 +15,21 @@ import 'package:kino_app/ui/home/widgets/now_playing_widget.dart';
 import 'package:kino_app/ui/home/widgets/people_widget.dart';
 import 'package:kino_app/ui/home/widgets/popular_widget.dart';
 import 'package:kino_app/ui/home/widgets/top_rated_widget.dart';
+import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: clrAsset,
         appBar: AppBar(
           backgroundColor: clrTransparent,
           elevation: 0,
           title: Text(
             'Kino App'.toUpperCase(),
             style: Theme.of(context).textTheme.caption.copyWith(
-                  color: clrBlack,
+                  color: clrWhite,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -46,7 +48,7 @@ class HomePage extends GetView<HomeController> {
                     GetBuilder<HomeController>(
                       builder: (homeController) => controller.isLoading.value
                           ? Center(
-                              child: CupertinoActivityIndicator(),
+                              child: NutsActivityIndicator(),
                             )
                           : Column(
                               children: [

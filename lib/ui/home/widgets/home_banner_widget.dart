@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/controller/home/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
+import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class HomeBannerWidget extends StatelessWidget {
   @override
@@ -25,33 +27,35 @@ class HomeBannerWidget extends StatelessWidget {
                   height: Get.height / 3,
                   width: Get.width,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => CupertinoActivityIndicator(),
-                  errorWidget: (context, url, error) => Container(
-                    child: Text('error'),
-                  ),
+                  placeholder: (context, url) => const NutsActivityIndicator(),
+                  errorWidget: (context, url, error) =>
+                      Container(child: const Text('error')),
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
               Container(
-                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(12),
-                    bottomRight: Radius.circular(12),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: const Radius.circular(12),
+                    bottomRight: const Radius.circular(12),
                   ),
                   gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [clrBlack, clrTransparent]),
-                ),
-                child: Text(
-                  movie.title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: const [clrOpacityBlack, clrTransparent],
                   ),
-                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+                  child: Text(
+                    movie.title,
+                    style: styBannerTitle,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
               Positioned.fill(
@@ -59,10 +63,7 @@ class HomeBannerWidget extends StatelessWidget {
                   color: clrTransparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12),
-                    onTap: () {
-                      print(
-                          '======================> id: ${movie.id} name: ${movie.title}');
-                    },
+                    onTap: () {},
                   ),
                 ),
               )
@@ -72,8 +73,8 @@ class HomeBannerWidget extends StatelessWidget {
         options: CarouselOptions(
           enableInfiniteScroll: true,
           autoPlay: true,
-          autoPlayInterval: Duration(seconds: 5),
-          autoPlayAnimationDuration: Duration(milliseconds: 1500),
+          autoPlayInterval: const Duration(seconds: 5),
+          autoPlayAnimationDuration: const Duration(milliseconds: 1500),
           pauseAutoPlayOnTouch: true,
           viewportFraction: 0.8,
           enlargeCenterPage: true,

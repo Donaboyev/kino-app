@@ -300,6 +300,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  flutter_rating_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_rating_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -422,6 +429,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  nuts_activity_indicator:
+    dependency: "direct main"
+    description:
+      name: nuts_activity_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   octo_image:
     dependency: transitive
     description:

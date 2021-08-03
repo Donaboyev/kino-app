@@ -13,42 +13,42 @@ class HomeController extends BaseController {
 
   HomeController({@required this.repository}) : assert(repository != null);
 
-  List<Movie> _upcomingMovies = [];
+  final List<Movie> _upcomingMovies = [];
 
   List<Genre> _genres = [];
-  List<Movie> _moviesByGenre = [];
-  RxInt _selectedGenreIndex = 0.obs;
+  final List<Movie> _moviesByGenre = [];
+  final RxInt _selectedGenreIndex = 0.obs;
   bool _hasNextDiscover = true;
-  RxBool _isDiscoverLoading = false.obs;
+  final RxBool _isDiscoverLoading = false.obs;
   int _discoverPage = 1;
   int _totalDiscoverPage = 1;
   ScrollController scrollController;
   bool _isAnotherGenreClicked = false;
   bool _isDiscoverScrollable = false;
 
-  List<Movie> _nowPlayingMovies = [];
+  final List<Movie> _nowPlayingMovies = [];
   bool _hasNextNowPlaying = true;
-  RxBool _isNowPlayingLoading = false.obs;
+  final RxBool _isNowPlayingLoading = false.obs;
   int _nowPlayingPage = 1;
   int _totalNowPlayingPage = 1;
 
-  List<Person> _people = [];
+  final List<Person> _people = [];
   int _totalPeoplePage = 1;
   int _peoplePage = 1;
   bool _hasNextPeople = true;
-  RxBool _isPeopleLoading = false.obs;
+  final RxBool _isPeopleLoading = false.obs;
 
   int _topRatedPage = 1;
   int _totalTopRatedPage = 1;
   bool _hasNextTopRated = true;
-  RxBool _isTopRatedLoading = false.obs;
-  List<Movie> _topRatedMovies = [];
+  final RxBool _isTopRatedLoading = false.obs;
+  final List<Movie> _topRatedMovies = [];
 
   int _popularPage = 1;
   int _totalPopularPage = 1;
   bool _hasNexPopular = true;
-  RxBool _isPopularLoading = false.obs;
-  List<Movie> _popularMovies = [];
+  final RxBool _isPopularLoading = false.obs;
+  final List<Movie> _popularMovies = [];
 
   @override
   void onInit() {
