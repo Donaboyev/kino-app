@@ -152,16 +152,17 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<String> getTrailerId(movieId, apiKey) async {
+  Future<TrailerResponse> getTrailerId(movieId, apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<String>(_setStreamType<String>(
-        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-            .compose(_dio.options, 'movie/$movieId/videos',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TrailerResponse>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, 'movie/$movieId/videos',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TrailerResponse.fromJson(_result.data);
     return value;
   }
 
@@ -181,18 +182,17 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<List<Cast>> getCastList(movieId, apiKey) async {
+  Future<CastResponse> getCastList(movieId, apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(_setStreamType<List<Cast>>(
-        Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-            .compose(_dio.options, 'movie/$movieId/credits',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data
-        .map((dynamic i) => Cast.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CastResponse>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, 'movie/$movieId/credits',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CastResponse.fromJson(_result.data);
     return value;
   }
 

@@ -51,13 +51,13 @@ class HomeController extends BaseController {
   final List<Movie> _popularMovies = [];
 
   @override
-  void onInit() {
-    getUpcomingMovies();
-    getGenres();
-    getNowPlayingMovies();
-    getPopularMovies();
-    getTopRatedMovies();
-    getTrendingPeople();
+  void onInit() async {
+    await getUpcomingMovies();
+    await getGenres();
+    await getNowPlayingMovies();
+    await getPopularMovies();
+    await getTopRatedMovies();
+    await getTrendingPeople();
     scrollController = ScrollController();
     super.onInit();
   }

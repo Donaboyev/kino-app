@@ -7,6 +7,7 @@ import 'package:kino_app/controller/home/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:kino_app/routes/app_routes.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class HomeBannerWidget extends StatelessWidget {
@@ -23,10 +24,12 @@ class HomeBannerWidget extends StatelessWidget {
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      'https://image.tmdb.org/t/p/w780/${movie.backdropPath}',
+                      'https://image.tmdb.org/t/p/w780/${movie.backdropPath ?? movie.posterPath}',
                   height: Get.height / 3,
                   width: Get.width,
-                  fit: BoxFit.cover,
+                  fit: movie.backdropPath != null
+                      ? BoxFit.cover
+                      : BoxFit.scaleDown,
                   placeholder: (context, url) => const NutsActivityIndicator(),
                   errorWidget: (context, url, error) =>
                       Container(child: const Text('error')),
@@ -63,7 +66,9 @@ class HomeBannerWidget extends StatelessWidget {
                   color: clrTransparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12),
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie.id);
+                    },
                   ),
                 ),
               )

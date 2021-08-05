@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/data/model/response/person_response.dart';
+import 'package:kino_app/data/model/response/cast_response.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
-class PersonWidget extends StatelessWidget {
-  final Person person;
+class CastWidget extends StatelessWidget {
+  final Cast cast;
 
-  const PersonWidget({Key key, this.person}) : super(key: key);
+  const CastWidget({Key key, this.cast}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class PersonWidget extends StatelessWidget {
                 child: ClipRRect(
                   child: CachedNetworkImage(
                     imageUrl:
-                        'https://image.tmdb.org/t/p/w200${person.profilePath}',
+                        'https://image.tmdb.org/t/p/w200${cast.profilePath}',
                     imageBuilder: (context, imageProvider) {
                       return Container(
                         width: 80,
@@ -54,7 +54,7 @@ class PersonWidget extends StatelessWidget {
               Container(
                 child: Center(
                   child: Text(
-                    person.name,
+                    cast.name,
                     style: const TextStyle(
                       color: clrWhite,
                       fontSize: 10,
@@ -65,7 +65,7 @@ class PersonWidget extends StatelessWidget {
               Container(
                 child: Center(
                   child: Text(
-                    person.knowForDepartment,
+                    cast.character,
                     style: const TextStyle(
                       color: clrWhite,
                       fontSize: 8,

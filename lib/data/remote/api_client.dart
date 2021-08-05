@@ -1,12 +1,13 @@
 import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
 import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/model/response/cast.dart';
+import 'package:kino_app/data/model/response/cast_response.dart';
 import 'package:kino_app/data/model/response/genre_response.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
 import 'package:kino_app/data/model/response/movie_detail.dart';
 import 'package:kino_app/data/model/response/movie_image.dart';
 import 'package:kino_app/data/model/response/person_response.dart';
+import 'package:kino_app/data/model/response/trailer_response.dart';
 import 'package:retrofit/http.dart';
 
 part 'api_client.g.dart';
@@ -92,7 +93,7 @@ abstract class ApiClient {
   );
 
   @GET('movie/{movieId}/videos')
-  Future<String> getTrailerId(
+  Future<TrailerResponse> getTrailerId(
     @Path('movieId') int movieId,
     @Query('api_key') String apiKey,
   );
@@ -104,7 +105,7 @@ abstract class ApiClient {
   );
 
   @GET('movie/{movieId}/credits')
-  Future<List<Cast>> getCastList(
+  Future<CastResponse> getCastList(
     @Path('movieId') int movieId,
     @Query('api_key') String apiKey,
   );

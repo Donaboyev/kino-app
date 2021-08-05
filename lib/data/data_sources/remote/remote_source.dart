@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:kino_app/data/model/response/cast.dart';
+import 'package:kino_app/data/model/response/cast_response.dart';
 import 'package:kino_app/data/model/response/genre_response.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
 import 'package:kino_app/data/model/response/movie_detail.dart';
 import 'package:kino_app/data/model/response/movie_image.dart';
 import 'package:kino_app/data/model/response/person_response.dart';
+import 'package:kino_app/data/model/response/trailer_response.dart';
 import 'package:kino_app/data/remote/api_client.dart';
 import 'package:kino_app/data/remote/response_handler.dart';
 import 'package:kino_app/data/remote/server_error.dart';
@@ -134,18 +135,18 @@ class RemoteSource {
     return ResponseHandler()..data = movieDetail;
   }
 
-  Future<ResponseHandler<String>> getTrailerId(
+  Future<ResponseHandler<TrailerResponse>> getTrailerId(
       {@required int movieId, @required String apiKey}) async {
-    String trailerId;
+    TrailerResponse response;
     try {
-      trailerId = await apiClient.getTrailerId(movieId, apiKey);
+      response = await apiClient.getTrailerId(movieId, apiKey);
     } catch (error, stacktrace) {
       print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
     }
-    return ResponseHandler()..data = trailerId;
+    return ResponseHandler()..data = response;
   }
 
   Future<ResponseHandler<MovieImage>> getMovieImage(
@@ -162,9 +163,9 @@ class RemoteSource {
     return ResponseHandler()..data = movieImage;
   }
 
-  Future<ResponseHandler<List<Cast>>> getCastList(
+  Future<ResponseHandler<CastResponse>> getCastList(
       {@required int movieId, @required String apiKey}) async {
-    List<Cast> casts;
+    CastResponse casts;
     try {
       casts = await apiClient.getCastList(movieId, apiKey);
     } catch (error, stacktrace) {
