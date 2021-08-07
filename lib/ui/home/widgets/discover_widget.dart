@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kino_app/controller/home/home_controller.dart';
+import 'package:kino_app/controller/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
 import 'package:kino_app/ui/home/widgets/movie_item_widget.dart';

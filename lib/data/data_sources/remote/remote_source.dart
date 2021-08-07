@@ -4,6 +4,7 @@ import 'package:kino_app/data/model/response/genre_response.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
 import 'package:kino_app/data/model/response/movie_detail.dart';
 import 'package:kino_app/data/model/response/movie_image.dart';
+import 'package:kino_app/data/model/response/person_detail.dart';
 import 'package:kino_app/data/model/response/person_response.dart';
 import 'package:kino_app/data/model/response/trailer_response.dart';
 import 'package:kino_app/data/remote/api_client.dart';
@@ -175,5 +176,19 @@ class RemoteSource {
         ..setException(ServerError.withError(error: error));
     }
     return ResponseHandler()..data = casts;
+  }
+
+  Future<ResponseHandler<PersonDetail>> getPersonDetail(
+      {@required int personId, @required String apiKey}) async {
+    PersonDetail response;
+    try {
+      response = await apiClient.getPersonDetail(personId, apiKey);
+    } catch (error, stacktrace) {
+      print(
+          'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
+      return ResponseHandler()
+        ..setException(ServerError.withError(error: error));
+    }
+    return ResponseHandler()..data = response;
   }
 }

@@ -2,9 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kino_app/controller/home/home_controller.dart';
+import 'package:kino_app/controller/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:kino_app/routes/app_routes.dart';
 import 'package:kino_app/ui/home/widgets/category_title_widget.dart';
 import 'package:kino_app/ui/home/widgets/movie_item_widget.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
@@ -17,7 +18,9 @@ class NowPlayingWidget extends StatelessWidget {
         children: [
           CategoryTitleWidget(
             title: 'Now playing',
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(AppRoutes.NOW_PLAYING_MORE);
+            },
           ),
           const SizedBox(height: 12),
           homeController.isLoading.value

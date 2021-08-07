@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 class BaseFunctions {
   static getReleaseDate(String release) {
+    if (release.isEmpty) return 'No data';
     DateTime parseDate = DateTime.parse(release);
     var newFormat = DateFormat('dd MMM yyyy');
     return newFormat.format(parseDate);

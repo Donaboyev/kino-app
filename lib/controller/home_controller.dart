@@ -249,8 +249,6 @@ class HomeController extends BaseController {
 
   List<Person> get people => _people;
 
-  RxBool get isPageLoading => _isNowPlayingLoading;
-
   RxBool get isPeopleLoading => _isPeopleLoading;
 
   List<Movie> get topRatedMovies => _topRatedMovies;

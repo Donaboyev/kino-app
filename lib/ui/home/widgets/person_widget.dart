@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/person_response.dart';
+import 'package:kino_app/routes/app_routes.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class PersonWidget extends StatelessWidget {
@@ -20,7 +22,6 @@ class PersonWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
                 ),
-                elevation: 3,
                 child: ClipRRect(
                   child: CachedNetworkImage(
                     imageUrl:
@@ -46,7 +47,7 @@ class PersonWidget extends StatelessWidget {
                     errorWidget: (context, url, error) => Container(
                       width: 80,
                       height: 80,
-                      child: const Center(child: const Text('error')),
+                      child: Image.asset('assets/images/png/no_image.png'),
                     ),
                   ),
                 ),
@@ -81,7 +82,9 @@ class PersonWidget extends StatelessWidget {
             color: clrTransparent,
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: person.id);
+              },
             ),
           ),
         )

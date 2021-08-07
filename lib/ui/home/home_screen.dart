@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kino_app/controller/home/home_controller.dart';
+import 'package:kino_app/controller/home_controller.dart';
 import 'package:kino_app/core/custom_widgets/modal_progress_hud.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/genre_response.dart';

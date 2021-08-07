@@ -18,7 +18,7 @@ class PersonResponse {
 }
 
 class Person {
-  final String id;
+  final int id;
   final String gender;
   final String name;
   final String profilePath;
@@ -40,7 +40,7 @@ class Person {
     }
 
     return Person(
-      id: json['id'].toString(),
+      id: json['id'],
       gender: json['gender'].toString(),
       name: json['name'],
       profilePath: json['profile_path'],

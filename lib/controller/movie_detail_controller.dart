@@ -62,7 +62,8 @@ class MovieDetailController extends BaseController {
     );
     setLoading(false);
     if (result is TrailerResponse) {
-      _movieDetail.trailerId = result.trailers[0].key;
+      if (result.trailers.isNotEmpty)
+        _movieDetail.trailerId = result.trailers[0].key;
       update();
     } else {
       print('===================> error: $result');

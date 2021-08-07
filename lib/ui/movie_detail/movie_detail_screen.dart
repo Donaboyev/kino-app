@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_functions.dart';
-import 'package:kino_app/controller/movie_detail/movie_detail_controller.dart';
+import 'package:kino_app/controller/movie_detail_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/cast_response.dart';
 import 'package:kino_app/data/model/response/screenshot.dart';
@@ -28,23 +28,30 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                     children: <Widget>[
                       Stack(
                         children: [
-                          ClipPath(
-                            child: ClipRRect(
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    'https://image.tmdb.org/t/p/original/${detailController.movieDetail.backdropPath}',
-                                height: Get.height / 2,
-                                width: Get.width,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    NutsActivityIndicator(),
-                                errorWidget: (context, url, error) => Container(
-                                  child: Text('error'),
+                          Visibility(
+                            visible:
+                                detailController.movieDetail.backdropPath !=
+                                    null,
+                            child: ClipPath(
+                              child: ClipRRect(
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      'https://image.tmdb.org/t/p/original/${detailController.movieDetail.backdropPath}',
+                                  height: Get.height / 2,
+                                  width: Get.width,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) =>
+                                      NutsActivityIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Container(
+                                    child: Image.asset(
+                                        'assets/images/png/no_image.png'),
+                                  ),
                                 ),
-                              ),
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(30),
-                                bottomRight: Radius.circular(30),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(30),
+                                  bottomRight: Radius.circular(30),
+                                ),
                               ),
                             ),
                           ),
@@ -73,10 +80,14 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                           color: clrTransparent,
                                           child: InkResponse(
                                             onTap: () async {
-                                              final youtubeUrl =
-                                                  'https://www.youtube.com/embed/${detailController.movieDetail.trailerId}';
-                                              if (await canLaunch(youtubeUrl))
-                                                await launch(youtubeUrl);
+                                              if (detailController
+                                                      .movieDetail.trailerId !=
+                                                  null) {
+                                                final youtubeUrl =
+                                                    'https://www.youtube.com/embed/${detailController.movieDetail.trailerId}';
+                                                if (await canLaunch(youtubeUrl))
+                                                  await launch(youtubeUrl);
+                                              }
                                             },
                                             child: Padding(
                                               padding: const EdgeInsets.all(24),
@@ -180,46 +191,58 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                 ),
                               ),
                               SizedBox(height: 12),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12.0),
-                                child: Text(
-                                  'Screenshots',
-                                  style: TextStyle(color: clrWhite),
+                              Visibility(
+                                visible: detailController.movieDetail.movieImage
+                                    .backdrops.isNotEmpty,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12.0),
+                                  child: Text(
+                                    'Screenshots',
+                                    style: TextStyle(color: clrWhite),
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 6),
-                              Container(
-                                height: 155,
-                                child: ListView.separated(
-                                  separatorBuilder: (context, index) =>
-                                      VerticalDivider(
-                                    color: clrTransparent,
-                                    width: 12,
-                                  ),
-                                  scrollDirection: Axis.horizontal,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12),
-                                  physics: BouncingScrollPhysics(),
-                                  itemCount: detailController
-                                      .movieDetail.movieImage.backdrops.length,
-                                  itemBuilder: (context, index) {
-                                    Screenshot image = detailController
-                                        .movieDetail
-                                        .movieImage
-                                        .backdrops[index];
-                                    return ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: CachedNetworkImage(
-                                        placeholder: (context, url) => Center(
-                                          child: NutsActivityIndicator(),
+                              Visibility(
+                                visible: detailController.movieDetail.movieImage
+                                    .backdrops.isNotEmpty,
+                                child: SizedBox(height: 6),
+                              ),
+                              Visibility(
+                                visible: detailController.movieDetail.movieImage
+                                    .backdrops.isNotEmpty,
+                                child: Container(
+                                  height: 155,
+                                  child: ListView.separated(
+                                    separatorBuilder: (context, index) =>
+                                        VerticalDivider(
+                                      color: clrTransparent,
+                                      width: 12,
+                                    ),
+                                    scrollDirection: Axis.horizontal,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12),
+                                    physics: BouncingScrollPhysics(),
+                                    itemCount: detailController.movieDetail
+                                        .movieImage.backdrops.length,
+                                    itemBuilder: (context, index) {
+                                      Screenshot image = detailController
+                                          .movieDetail
+                                          .movieImage
+                                          .backdrops[index];
+                                      return ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: CachedNetworkImage(
+                                          placeholder: (context, url) => Center(
+                                            child: NutsActivityIndicator(),
+                                          ),
+                                          imageUrl:
+                                              'https://image.tmdb.org/t/p/w500${image.imagePath}',
+                                          fit: BoxFit.cover,
                                         ),
-                                        imageUrl:
-                                            'https://image.tmdb.org/t/p/w500${image.imagePath}',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                               SizedBox(height: 12),

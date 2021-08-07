@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:kino_app/routes/app_routes.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class MovieItemWidget extends StatelessWidget {
@@ -94,7 +96,9 @@ class MovieItemWidget extends StatelessWidget {
             color: clrTransparent,
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie.id);
+              },
             ),
           ),
         )

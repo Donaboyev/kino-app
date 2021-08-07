@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:kino_app/controller/home/home_controller.dart';
+import 'package:kino_app/controller/home_controller.dart';
 import 'package:kino_app/data/data_sources/remote/remote_source.dart';
 import 'package:kino_app/data/remote/api_client.dart';
 import 'package:kino_app/data/repository/home_repository.dart';

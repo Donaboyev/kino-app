@@ -6,6 +6,7 @@ import 'package:kino_app/data/model/response/genre_response.dart';
 import 'package:kino_app/data/model/response/movie_response.dart';
 import 'package:kino_app/data/model/response/movie_detail.dart';
 import 'package:kino_app/data/model/response/movie_image.dart';
+import 'package:kino_app/data/model/response/person_detail.dart';
 import 'package:kino_app/data/model/response/person_response.dart';
 import 'package:kino_app/data/model/response/trailer_response.dart';
 import 'package:retrofit/http.dart';
@@ -107,6 +108,12 @@ abstract class ApiClient {
   @GET('movie/{movieId}/credits')
   Future<CastResponse> getCastList(
     @Path('movieId') int movieId,
+    @Query('api_key') String apiKey,
+  );
+
+  @GET('person/{personId}')
+  Future<PersonDetail> getPersonDetail(
+    @Path('personId') int personId,
     @Query('api_key') String apiKey,
   );
 }
