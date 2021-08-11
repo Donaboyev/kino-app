@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/model/response/genre_response.dart';
-import 'package:kino_app/data/model/response/movie_response.dart';
-import 'package:kino_app/data/model/response/person_response.dart';
+import 'package:kino_app/data/response/genre_response.dart';
+import 'package:kino_app/data/response/movie_response.dart';
+import 'package:kino_app/data/response/person_response.dart';
 import 'package:kino_app/data/repository/home_repository.dart';
 
 class HomeController extends BaseController {
@@ -83,12 +83,10 @@ class HomeController extends BaseController {
 
   Future<void> getTopRatedMovies() async {
     if (!_hasNextTopRated) return;
-
     if (_topRatedPage == 1)
       setLoading(true);
     else
       _isTopRatedLoading.value = true;
-
     final result = await repository.getTopRatedMovies(
       apiKey: Constants.API_KEY,
       page: _topRatedPage,
@@ -98,9 +96,7 @@ class HomeController extends BaseController {
     if (result is MovieResponse) {
       _totalTopRatedPage = result.totalPages;
       _topRatedPage++;
-      if (_topRatedPage > _totalTopRatedPage) {
-        _hasNextTopRated = false;
-      }
+      if (_topRatedPage > _totalTopRatedPage) _hasNextTopRated = false;
       _topRatedMovies.addAll(result.movies);
       update();
     } else {
@@ -110,12 +106,10 @@ class HomeController extends BaseController {
 
   Future<void> getPopularMovies() async {
     if (!_hasNexPopular) return;
-
     if (_popularPage == 1)
       setLoading(true);
     else
       _isPopularLoading.value = true;
-
     final result = await repository.getPopularMovies(
       apiKey: Constants.API_KEY,
       page: _popularPage,
@@ -135,12 +129,10 @@ class HomeController extends BaseController {
 
   Future<void> getNowPlayingMovies() async {
     if (!_hasNextNowPlaying) return;
-
     if (_nowPlayingPage == 1)
       setLoading(true);
     else
       _isNowPlayingLoading.value = true;
-
     final result = await repository.getNowPlayingMovies(
       apiKey: Constants.API_KEY,
       page: _nowPlayingPage,
@@ -186,12 +178,10 @@ class HomeController extends BaseController {
 
   Future<void> getMoviesByGenre() async {
     if (!_hasNextDiscover) return;
-
     if (_discoverPage == 1)
       setLoading(true);
     else
       _isDiscoverLoading.value = true;
-
     final result = await repository.getMoviesByGenre(
       apiKey: Constants.API_KEY,
       page: _discoverPage,
@@ -220,12 +210,10 @@ class HomeController extends BaseController {
 
   Future<void> getTrendingPeople() async {
     if (!_hasNextPeople) return;
-
     if (_peoplePage == 1)
       setLoading(true);
     else
       _isPeopleLoading.value = true;
-
     final result = await repository.getTrendingPeople(
       apiKey: Constants.API_KEY,
       page: _peoplePage,

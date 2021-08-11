@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:kino_app/core/constants/constants.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:kino_app/core/theme/text_styles.dart';
+import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
@@ -25,7 +27,7 @@ class MoreMovieItemWidget extends StatelessWidget {
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      'https://image.tmdb.org/t/p/w780/${movie.backdropPath ?? movie.posterPath}',
+                      '${Constants.BIG_IMAGE_BASE_URL}${movie.backdropPath ?? movie.posterPath}',
                   imageBuilder: (context, imageProvider) {
                     return Container(
                       width: 140,
@@ -40,37 +42,33 @@ class MoreMovieItemWidget extends StatelessWidget {
                     );
                   },
                   placeholder: (context, url) => Container(
-                    width: 180,
-                    height: 250,
+                    width: 140,
+                    height: 200,
                     child: const Center(child: const NutsActivityIndicator()),
                   ),
                   errorWidget: (context, url, error) => Container(
-                    width: 180,
-                    height: 250,
-                    child: const Center(child: const Text('error')),
+                    width: 140,
+                    height: 200,
+                    child: Image.asset('assets/images/png/no_image.png'),
                   ),
                 ),
               ),
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         child: Text(
                           movie.title.toUpperCase(),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: clrWhite,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: styMovieTitle,
                           maxLines: 2,
                           overflow: TextOverflow.fade,
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.only(bottom: 4, top: 4),
+                        padding: const EdgeInsets.symmetric(vertical: 4),
                         child: Row(
                           children: <Widget>[
                             RatingBarIndicator(
@@ -87,9 +85,7 @@ class MoreMovieItemWidget extends StatelessWidget {
                             const SizedBox(width: 6),
                             Text(
                               movie.voteAverage.toString(),
-                              style: const TextStyle(
-                                color: clrWhite,
-                              ),
+                              style: styVoteAverage,
                             ),
                           ],
                         ),
@@ -98,7 +94,7 @@ class MoreMovieItemWidget extends StatelessWidget {
                         visible: movie.overview != null,
                         child: Text(
                           movie.overview,
-                          style: TextStyle(color: clrWhite),
+                          style: styMovieDescription,
                           maxLines: 7,
                           overflow: TextOverflow.fade,
                         ),
@@ -107,7 +103,7 @@ class MoreMovieItemWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.chevron_right,
                 color: clrWhite,
               ),
@@ -118,9 +114,8 @@ class MoreMovieItemWidget extends StatelessWidget {
               color: clrTransparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
-                onTap: () {
-                  Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie.id);
-                },
+                onTap: () =>
+                    Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie.id),
               ),
             ),
           )

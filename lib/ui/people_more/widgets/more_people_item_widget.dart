@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:kino_app/core/constants/constants.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/data/model/response/movie_response.dart';
-import 'package:kino_app/data/model/response/person_response.dart';
+import 'package:kino_app/core/theme/text_styles.dart';
+import 'package:kino_app/data/response/movie_response.dart';
+import 'package:kino_app/data/response/person_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
@@ -26,7 +28,7 @@ class MorePeopleItemWidget extends StatelessWidget {
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      'https://image.tmdb.org/t/p/w780/${person.profilePath}',
+                      '${Constants.BIG_IMAGE_BASE_URL}${person.profilePath}',
                   imageBuilder: (context, imageProvider) {
                     return Container(
                       width: 140,
@@ -54,18 +56,14 @@ class MorePeopleItemWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         child: Text(
                           person.name.toUpperCase(),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: clrWhite,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: styMorePersonName,
                           maxLines: 2,
                           overflow: TextOverflow.fade,
                         ),
@@ -74,7 +72,7 @@ class MorePeopleItemWidget extends StatelessWidget {
                         visible: person.knowForDepartment != null,
                         child: Text(
                           person.knowForDepartment,
-                          style: TextStyle(color: clrWhite),
+                          style: styVoteAverage,
                           maxLines: 7,
                           overflow: TextOverflow.fade,
                         ),
@@ -83,7 +81,7 @@ class MorePeopleItemWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.chevron_right,
                 color: clrWhite,
               ),
@@ -94,9 +92,8 @@ class MorePeopleItemWidget extends StatelessWidget {
               color: clrTransparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
-                onTap: () {
-                  Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: person.id);
-                },
+                onTap: () =>
+                    Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: person.id),
               ),
             ),
           )

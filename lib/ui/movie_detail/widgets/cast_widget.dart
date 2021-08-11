@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kino_app/core/constants/constants.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/data/model/response/cast_response.dart';
+import 'package:kino_app/core/theme/text_styles.dart';
+import 'package:kino_app/data/response/cast_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
@@ -26,7 +28,7 @@ class CastWidget extends StatelessWidget {
                 child: ClipRRect(
                   child: CachedNetworkImage(
                     imageUrl:
-                        'https://image.tmdb.org/t/p/w200${cast.profilePath}',
+                        '${Constants.SMALL_IMAGE_BASE_URL}${cast.profilePath}',
                     imageBuilder: (context, imageProvider) {
                       return Container(
                         width: 80,
@@ -57,10 +59,7 @@ class CastWidget extends StatelessWidget {
                 child: Center(
                   child: Text(
                     cast.name,
-                    style: const TextStyle(
-                      color: clrWhite,
-                      fontSize: 10,
-                    ),
+                    style: styPersonName,
                   ),
                 ),
               ),
@@ -68,10 +67,7 @@ class CastWidget extends StatelessWidget {
                 child: Center(
                   child: Text(
                     cast.character,
-                    style: const TextStyle(
-                      color: clrWhite,
-                      fontSize: 8,
-                    ),
+                    style: styPersonKnownFor,
                   ),
                 ),
               ),
@@ -85,8 +81,7 @@ class CastWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               onTap: () {
                 if (cast.id != null)
-                  print('====================> cast id: ${cast.id}');
-                Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: cast.id);
+                  Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: cast.id);
               },
             ),
           ),

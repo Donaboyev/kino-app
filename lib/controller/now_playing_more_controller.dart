@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/model/response/genre_response.dart';
-import 'package:kino_app/data/model/response/movie_response.dart';
-import 'package:kino_app/data/model/response/person_response.dart';
-import 'package:kino_app/data/repository/home_repository.dart';
+import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/data/repository/now_playing_more_repository.dart';
 
 class NowPlayingMoreController extends BaseController {
@@ -29,9 +26,7 @@ class NowPlayingMoreController extends BaseController {
     scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
-        getNowPlayingMovies();
-      }
+          scrollController.position.pixels) getNowPlayingMovies();
     });
     super.onInit();
   }
@@ -44,12 +39,10 @@ class NowPlayingMoreController extends BaseController {
 
   Future<void> getNowPlayingMovies() async {
     if (!_hasNextNowPlaying) return;
-
     if (_nowPlayingPage == 1)
       setLoading(true);
     else
       _isNowPlayingLoading.value = true;
-
     final result = await repository.getNowPlayingMovies(
       apiKey: Constants.API_KEY,
       page: _nowPlayingPage,

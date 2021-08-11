@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/data/repository/popular_more_repository.dart';
 
 class PopularMoreController extends BaseController {
@@ -26,9 +26,7 @@ class PopularMoreController extends BaseController {
     scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
-        getPopularMovies();
-      }
+          scrollController.position.pixels) getPopularMovies();
     });
     super.onInit();
   }

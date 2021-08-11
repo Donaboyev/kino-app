@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:kino_app/data/model/response/screenshot.dart';
+import 'package:kino_app/data/response/screenshot.dart';
 
 class MovieImage extends Equatable {
   final List<Screenshot> backdrops;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/controller/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/ui/home/widgets/movie_item_widget.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
@@ -15,7 +15,7 @@ class DiscoverWidget extends StatelessWidget {
         children: [
           const SizedBox(height: 12),
           homeController.isLoading.value
-              ? Center(child: NutsActivityIndicator())
+              ? const Center(child: const NutsActivityIndicator())
               : Container(
                   height: 300,
                   child: NotificationListener<ScrollNotification>(
@@ -31,9 +31,10 @@ class DiscoverWidget extends StatelessWidget {
                     child: Stack(
                       children: [
                         ListView.separated(
-                          separatorBuilder: (context, index) => VerticalDivider(
+                          separatorBuilder: (context, index) =>
+                              const VerticalDivider(
                             color: clrTransparent,
-                            width: 15,
+                            width: 12,
                           ),
                           scrollDirection: Axis.horizontal,
                           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -51,9 +52,9 @@ class DiscoverWidget extends StatelessWidget {
                             visible: homeController.isDiscoverLoading.value,
                             child: const Padding(
                               padding: const EdgeInsets.only(right: 8.0),
-                              child: Align(
+                              child: const Align(
                                 alignment: Alignment.centerRight,
-                                child: NutsActivityIndicator(radius: 25),
+                                child: const NutsActivityIndicator(radius: 12),
                               ),
                             ),
                           ),

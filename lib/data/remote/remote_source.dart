@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'package:kino_app/data/model/response/cast_response.dart';
-import 'package:kino_app/data/model/response/genre_response.dart';
-import 'package:kino_app/data/model/response/movie_response.dart';
-import 'package:kino_app/data/model/response/movie_detail.dart';
-import 'package:kino_app/data/model/response/movie_image.dart';
-import 'package:kino_app/data/model/response/person_detail.dart';
-import 'package:kino_app/data/model/response/person_response.dart';
-import 'package:kino_app/data/model/response/trailer_response.dart';
-import 'package:kino_app/data/remote/api_client.dart';
+import 'package:kino_app/data/remote/client/api_client.dart';
 import 'package:kino_app/data/remote/response_handler.dart';
 import 'package:kino_app/data/remote/server_error.dart';
+import 'package:kino_app/data/response/cast_response.dart';
+import 'package:kino_app/data/response/genre_response.dart';
+import 'package:kino_app/data/response/movie_detail.dart';
+import 'package:kino_app/data/response/movie_image.dart';
+import 'package:kino_app/data/response/movie_response.dart';
+import 'package:kino_app/data/response/person_detail.dart';
+import 'package:kino_app/data/response/person_response.dart';
+import 'package:kino_app/data/response/trailer_response.dart';
 
 class RemoteSource {
   ApiClient apiClient;

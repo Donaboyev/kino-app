@@ -23,7 +23,10 @@ class CategoryTitleWidget extends StatelessWidget {
               IconButton(
                 iconSize: 32,
                 onPressed: onTap,
-                icon: Icon(Icons.arrow_right_alt_outlined, color: clrWhite),
+                icon: const Icon(
+                  Icons.arrow_right_alt_outlined,
+                  color: clrWhite,
+                ),
               )
             ],
           ),

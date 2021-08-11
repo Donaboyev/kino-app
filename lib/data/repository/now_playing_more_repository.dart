@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:kino_app/data/data_sources/remote/remote_source.dart';
+import 'package:kino_app/data/remote/remote_source.dart';
 
 class NowPlayingMoreRepository {
   final RemoteSource remoteSource;

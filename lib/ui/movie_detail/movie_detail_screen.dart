@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_functions.dart';
 import 'package:kino_app/controller/movie_detail_controller.dart';
+import 'package:kino_app/core/constants/constants.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/data/model/response/cast_response.dart';
-import 'package:kino_app/data/model/response/screenshot.dart';
+import 'package:kino_app/core/theme/text_styles.dart';
+import 'package:kino_app/data/response/cast_response.dart';
+import 'package:kino_app/data/response/screenshot.dart';
 import 'package:kino_app/ui/movie_detail/widgets/cast_widget.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,55 +16,47 @@ import 'package:url_launcher/url_launcher.dart';
 class MovieDetailPage extends GetView<MovieDetailController> {
   @override
   Widget build(BuildContext context) {
-    int movieId = Get.arguments;
+    final int movieId = Get.arguments;
     controller.setMovieId(movieId);
     return GetBuilder<MovieDetailController>(
       builder: (detailController) => detailController.isLoading.value
-          ? Center(child: NutsActivityIndicator())
+          ? const Center(child: const NutsActivityIndicator())
           : Scaffold(
               backgroundColor: clrAsset,
               body: Stack(
                 children: [
                   ListView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     children: <Widget>[
                       Stack(
                         children: [
-                          Visibility(
-                            visible:
-                                detailController.movieDetail.backdropPath !=
-                                    null,
-                            child: ClipPath(
-                              child: ClipRRect(
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      'https://image.tmdb.org/t/p/original/${detailController.movieDetail.backdropPath}',
-                                  height: Get.height / 2,
-                                  width: Get.width,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) =>
-                                      NutsActivityIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      Container(
-                                    child: Image.asset(
-                                        'assets/images/png/no_image.png'),
-                                  ),
-                                ),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(30),
-                                  bottomRight: Radius.circular(30),
-                                ),
+                          ClipRRect(
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  '${Constants.ORIGINAL_IMAGE_BASE_URL}${detailController.movieDetail.backdropPath}',
+                              height: Get.height / 2,
+                              width: Get.width,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) =>
+                                  const NutsActivityIndicator(),
+                              errorWidget: (context, url, error) => Container(
+                                child: Image.asset(
+                                    'assets/images/png/no_image.png'),
                               ),
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: const Radius.circular(30),
+                              bottomRight: const Radius.circular(30),
                             ),
                           ),
                           Container(
                             height: Get.height / 2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(30),
-                                bottomRight: Radius.circular(30),
+                            decoration: const BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                bottomLeft: const Radius.circular(30),
+                                bottomRight: const Radius.circular(30),
                               ),
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
                                 colors: const [clrOpacityBlack, clrTransparent],
@@ -80,18 +74,14 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                           color: clrTransparent,
                                           child: InkResponse(
                                             onTap: () async {
-                                              if (detailController
-                                                      .movieDetail.trailerId !=
-                                                  null) {
-                                                final youtubeUrl =
-                                                    'https://www.youtube.com/embed/${detailController.movieDetail.trailerId}';
-                                                if (await canLaunch(youtubeUrl))
-                                                  await launch(youtubeUrl);
-                                              }
+                                              final youtubeUrl =
+                                                  'https://www.youtube.com/embed/${detailController.movieDetail.trailerId}';
+                                              if (await canLaunch(youtubeUrl))
+                                                await launch(youtubeUrl);
                                             },
-                                            child: Padding(
+                                            child: const Padding(
                                               padding: const EdgeInsets.all(24),
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.play_circle_outline,
                                                 color: clrPink,
                                                 size: 56,
@@ -101,12 +91,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                         ),
                                         Text(
                                           detailController.movieDetail.title,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Amatic',
-                                          ),
+                                          style: styBannerTitle,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ],
@@ -120,18 +105,19 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                       ),
                       Column(
                         children: <Widget>[
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 12),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 12),
                                 child: Text(
                                   detailController.movieDetail.overview,
-                                  style: TextStyle(color: clrWhite),
+                                  style: styVoteAverage,
                                 ),
                               ),
-                              SizedBox(height: 12),
+                              const SizedBox(height: 12),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 12.0),
@@ -143,15 +129,15 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(
+                                        const Text(
                                           'Release date',
-                                          style: TextStyle(color: clrWhite),
+                                          style: styVoteAverage,
                                         ),
                                         Text(
                                           BaseFunctions.getReleaseDate(
                                               detailController
                                                   .movieDetail.releaseDate),
-                                          style: TextStyle(color: clrRating),
+                                          style: styGoldText,
                                         ),
                                       ],
                                     ),
@@ -159,15 +145,15 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(
+                                        const Text(
                                           'Run time',
-                                          style: TextStyle(color: clrWhite),
+                                          style: styVoteAverage,
                                         ),
                                         Text(
                                           BaseFunctions.getRuntime(
                                               detailController
                                                   .movieDetail.runtime),
-                                          style: TextStyle(color: clrRating),
+                                          style: styGoldText,
                                         ),
                                       ],
                                     ),
@@ -175,38 +161,38 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(
+                                        const Text(
                                           'Budget',
-                                          style: TextStyle(color: clrWhite),
+                                          style: styVoteAverage,
                                         ),
                                         Text(
                                           BaseFunctions.getBudget(
                                               detailController
                                                   .movieDetail.budget),
-                                          style: TextStyle(color: clrRating),
+                                          style: styGoldText,
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 12),
+                              const SizedBox(height: 12),
                               Visibility(
                                 visible: detailController.movieDetail.movieImage
                                     .backdrops.isNotEmpty,
-                                child: Padding(
+                                child: const Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12.0),
-                                  child: Text(
+                                  child: const Text(
                                     'Screenshots',
-                                    style: TextStyle(color: clrWhite),
+                                    style: styVoteAverage,
                                   ),
                                 ),
                               ),
                               Visibility(
                                 visible: detailController.movieDetail.movieImage
                                     .backdrops.isNotEmpty,
-                                child: SizedBox(height: 6),
+                                child: const SizedBox(height: 6),
                               ),
                               Visibility(
                                 visible: detailController.movieDetail.movieImage
@@ -215,29 +201,31 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                   height: 155,
                                   child: ListView.separated(
                                     separatorBuilder: (context, index) =>
-                                        VerticalDivider(
+                                        const VerticalDivider(
                                       color: clrTransparent,
                                       width: 12,
                                     ),
                                     scrollDirection: Axis.horizontal,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12),
-                                    physics: BouncingScrollPhysics(),
+                                    physics: const BouncingScrollPhysics(),
                                     itemCount: detailController.movieDetail
                                         .movieImage.backdrops.length,
                                     itemBuilder: (context, index) {
-                                      Screenshot image = detailController
+                                      final Screenshot image = detailController
                                           .movieDetail
                                           .movieImage
                                           .backdrops[index];
                                       return ClipRRect(
                                         borderRadius: BorderRadius.circular(8),
                                         child: CachedNetworkImage(
-                                          placeholder: (context, url) => Center(
-                                            child: NutsActivityIndicator(),
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                            child:
+                                                const NutsActivityIndicator(),
                                           ),
                                           imageUrl:
-                                              'https://image.tmdb.org/t/p/w500${image.imagePath}',
+                                              '${Constants.MEDIUM_IMAGE_BASE_URL}${image.imagePath}',
                                           fit: BoxFit.cover,
                                         ),
                                       );
@@ -245,23 +233,23 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 12),
-                              Padding(
+                              const SizedBox(height: 12),
+                              const Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 12.0),
-                                child: Text(
+                                child: const Text(
                                   'Casts',
-                                  style: TextStyle(color: clrWhite),
+                                  style: styVoteAverage,
                                 ),
                               ),
-                              SizedBox(height: 12),
+                              const SizedBox(height: 12),
                               Container(
                                 height: 118,
                                 child: ListView.separated(
                                   scrollDirection: Axis.horizontal,
                                   separatorBuilder: (context, index) =>
-                                      VerticalDivider(
-                                    color: Colors.transparent,
+                                      const VerticalDivider(
+                                    color: clrTransparent,
                                     width: 6,
                                   ),
                                   itemCount: detailController
@@ -269,7 +257,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12),
                                   itemBuilder: (context, index) {
-                                    Cast cast = detailController
+                                    final Cast cast = detailController
                                         .movieDetail.castList[index];
                                     return CastWidget(cast: cast);
                                   },
@@ -287,9 +275,9 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                       color: clrTransparent,
                       child: InkResponse(
                         onTap: () => Get.back(),
-                        child: Padding(
+                        child: const Padding(
                           padding: const EdgeInsets.all(24),
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_back_ios,
                             color: clrWhite,
                           ),

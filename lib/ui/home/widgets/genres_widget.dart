@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:kino_app/controller/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
-import 'package:kino_app/data/model/response/genre_response.dart';
+import 'package:kino_app/data/response/genre_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
 import 'package:kino_app/ui/home/widgets/category_title_widget.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
@@ -18,23 +18,22 @@ class GenresWidget extends GetView<HomeController> {
         children: [
           CategoryTitleWidget(
             title: 'Discover movies',
-            onTap: () {
-              Get.toNamed(AppRoutes.DISCOVER_MORE);
-            },
+            onTap: () => Get.toNamed(AppRoutes.DISCOVER_MORE),
           ),
           homeController.isLoading.value
-              ? Center(child: const NutsActivityIndicator())
+              ? const Center(child: const NutsActivityIndicator())
               : SizedBox(
                   height: 45,
                   child: Align(
                     alignment: Alignment.center,
                     child: ListView.separated(
-                      separatorBuilder: (context, index) => VerticalDivider(
+                      separatorBuilder: (context, index) =>
+                          const VerticalDivider(
                         color: clrTransparent,
-                        width: 5,
+                        width: 0,
                       ),
                       scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 7),
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
                       physics: const BouncingScrollPhysics(),
                       itemCount: homeController.genres.length,
                       itemBuilder: (context, index) {
@@ -47,7 +46,7 @@ class GenresWidget extends GetView<HomeController> {
                                   .setSelectedGenreIndex(index),
                               elevation: 0,
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
+                                  const EdgeInsets.symmetric(horizontal: 4),
                               fillColor:
                                   homeController.selectedGenreIndex.value ==
                                           index
@@ -61,15 +60,7 @@ class GenresWidget extends GetView<HomeController> {
                               child: Center(
                                 child: Text(
                                   genre.name,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: homeController
-                                                .selectedGenreIndex.value !=
-                                            index
-                                        ? clrWhite
-                                        : clrWhite,
-                                  ),
+                                  style: styGenreTitle,
                                 ),
                               ),
                             ),

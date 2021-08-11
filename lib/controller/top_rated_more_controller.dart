@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/model/response/movie_response.dart';
+import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/data/repository/top_rated_more_repository.dart';
 
 class TopRatedMoreController extends BaseController {
@@ -25,9 +25,7 @@ class TopRatedMoreController extends BaseController {
     scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
-        getTopRatedMovies();
-      }
+          scrollController.position.pixels) getTopRatedMovies();
     });
     super.onInit();
   }
@@ -40,12 +38,10 @@ class TopRatedMoreController extends BaseController {
 
   Future<void> getTopRatedMovies() async {
     if (!_hasNextTopRated) return;
-
     if (_topRatedPage == 1)
       setLoading(true);
     else
       _isTopRatedLoading.value = true;
-
     final result = await repository.getTopRatedMovies(
       apiKey: Constants.API_KEY,
       page: _topRatedPage,
@@ -55,9 +51,7 @@ class TopRatedMoreController extends BaseController {
     if (result is MovieResponse) {
       _totalTopRatedPage = result.totalPages;
       _topRatedPage++;
-      if (_topRatedPage > _totalTopRatedPage) {
-        _hasNextTopRated = false;
-      }
+      if (_topRatedPage > _totalTopRatedPage) _hasNextTopRated = false;
       _topRatedMovies.addAll(result.movies);
       update();
     } else {

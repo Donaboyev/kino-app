@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/controller/home_controller.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/data/model/response/person_response.dart';
+import 'package:kino_app/data/response/person_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
 import 'package:kino_app/ui/home/widgets/category_title_widget.dart';
 import 'package:kino_app/ui/home/widgets/person_widget.dart';
@@ -17,9 +16,7 @@ class PeopleWidget extends StatelessWidget {
       children: [
         CategoryTitleWidget(
           title: 'Popular people',
-          onTap: () {
-            Get.toNamed(AppRoutes.PEOPLE_MORE);
-          },
+          onTap: () => Get.toNamed(AppRoutes.PEOPLE_MORE),
         ),
         const SizedBox(height: 12),
         Column(
@@ -48,7 +45,7 @@ class PeopleWidget extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 12),
                               separatorBuilder: (context, index) =>
-                                  VerticalDivider(
+                                  const VerticalDivider(
                                 color: clrTransparent,
                                 width: 5,
                               ),
