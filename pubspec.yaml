@@ -32,6 +32,13 @@ dev_dependencies:
   retrofit_generator: any
   build_runner: any
 
+  flutter_launcher_icons: ^0.9.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/png/kino_app_logo.png"
+
 flutter:
   uses-material-design: true
   fonts:
