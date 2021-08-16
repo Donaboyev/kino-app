@@ -1,6 +1,6 @@
 class PersonResponse {
-  List<Person> people;
-  int totalPages;
+  List<Person>? people;
+  int? totalPages;
 
   PersonResponse({this.totalPages, this.people});
 
@@ -8,7 +8,7 @@ class PersonResponse {
     if (json['results'] != null) {
       people = <Person>[];
       json['results'].forEach((v) {
-        people.add(new Person.fromJson(v));
+        people!.add(new Person.fromJson(v));
       });
     } else {
       people = [];
@@ -18,12 +18,12 @@ class PersonResponse {
 }
 
 class Person {
-  final int id;
-  final String gender;
-  final String name;
-  final String profilePath;
-  final String knowForDepartment;
-  final String popularity;
+  final int? id;
+  final String? gender;
+  final String? name;
+  final String? profilePath;
+  final String? knowForDepartment;
+  final String? popularity;
 
   Person({
     this.id,
@@ -35,9 +35,9 @@ class Person {
   });
 
   factory Person.fromJson(dynamic json) {
-    if (json == null) {
-      return Person();
-    }
+    // if (json == null) {
+    //   return Person();
+    // }
 
     return Person(
       id: json['id'],

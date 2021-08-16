@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
 
   final Dio _dio;
 
-  String baseUrl;
+  String? baseUrl;
 
   @override
   Future<MovieResponse> getUpcomingMovies(apiKey) async {
@@ -26,7 +26,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'movie/upcoming',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieResponse.fromJson(_result.data);
+    final value = MovieResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -44,7 +44,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'movie/now_playing',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieResponse.fromJson(_result.data);
+    final value = MovieResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -62,7 +62,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'movie/popular',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieResponse.fromJson(_result.data);
+    final value = MovieResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -80,7 +80,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'movie/top_rated',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieResponse.fromJson(_result.data);
+    final value = MovieResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -92,6 +92,7 @@ class _ApiClient implements ApiClient {
       r'page': page,
       r'api_key': apiKey
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MovieResponse>(
@@ -99,7 +100,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'discover/movie',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieResponse.fromJson(_result.data);
+    final value = MovieResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -114,7 +115,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'genre/movie/list',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GenreResponse.fromJson(_result.data);
+    final value = GenreResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -132,7 +133,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'person/popular',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PersonResponse.fromJson(_result.data);
+    final value = PersonResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -140,6 +141,7 @@ class _ApiClient implements ApiClient {
   Future<MovieDetail> getMovieDetail(movieId, apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MovieDetail>(
@@ -147,7 +149,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'movie/$movieId',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieDetail.fromJson(_result.data);
+    final value = MovieDetail.fromJson(_result.data!);
     return value;
   }
 
@@ -155,6 +157,7 @@ class _ApiClient implements ApiClient {
   Future<TrailerResponse> getTrailerId(movieId, apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<TrailerResponse>(
@@ -162,7 +165,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'movie/$movieId/videos',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = TrailerResponse.fromJson(_result.data);
+    final value = TrailerResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -170,6 +173,7 @@ class _ApiClient implements ApiClient {
   Future<MovieImage> getMovieImage(movieId, apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MovieImage>(
@@ -177,7 +181,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'movie/$movieId/images',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieImage.fromJson(_result.data);
+    final value = MovieImage.fromJson(_result.data!);
     return value;
   }
 
@@ -185,6 +189,7 @@ class _ApiClient implements ApiClient {
   Future<CastResponse> getCastList(movieId, apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CastResponse>(
@@ -192,7 +197,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'movie/$movieId/credits',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CastResponse.fromJson(_result.data);
+    final value = CastResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -200,6 +205,7 @@ class _ApiClient implements ApiClient {
   Future<PersonDetail> getPersonDetail(personId, apiKey) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'api_key': apiKey};
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PersonDetail>(
@@ -207,7 +213,7 @@ class _ApiClient implements ApiClient {
                 .compose(_dio.options, 'person/$personId',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PersonDetail.fromJson(_result.data);
+    final value = PersonDetail.fromJson(_result.data!);
     return value;
   }
 

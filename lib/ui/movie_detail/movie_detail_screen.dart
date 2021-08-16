@@ -5,18 +5,18 @@ import 'package:get/get.dart';
 import 'package:kino_app/base/base_functions.dart';
 import 'package:kino_app/controller/movie_detail_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/data/response/cast_response.dart';
 import 'package:kino_app/data/response/screenshot.dart';
 import 'package:kino_app/ui/movie_detail/widgets/cast_widget.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MovieDetailPage extends GetView<MovieDetailController> {
   @override
   Widget build(BuildContext context) {
-    final int movieId = Get.arguments;
+    final int? movieId = Get.arguments;
     controller.setMovieId(movieId);
     return GetBuilder<MovieDetailController>(
       builder: (detailController) => detailController.isLoading.value
@@ -33,7 +33,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                           ClipRRect(
                             child: CachedNetworkImage(
                               imageUrl:
-                                  '${Constants.ORIGINAL_IMAGE_BASE_URL}${detailController.movieDetail.backdropPath}',
+                                  '${Constants.ORIGINAL_IMAGE_BASE_URL}${detailController.movieDetail!.backdropPath}',
                               height: Get.height / 2,
                               width: Get.width,
                               fit: BoxFit.cover,
@@ -75,7 +75,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                           child: InkResponse(
                                             onTap: () async {
                                               final youtubeUrl =
-                                                  'https://www.youtube.com/embed/${detailController.movieDetail.trailerId}';
+                                                  'https://www.youtube.com/embed/${detailController.movieDetail!.trailerId}';
                                               if (await canLaunch(youtubeUrl))
                                                 await launch(youtubeUrl);
                                             },
@@ -90,7 +90,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                           ),
                                         ),
                                         Text(
-                                          detailController.movieDetail.title,
+                                          detailController.movieDetail!.title!,
                                           style: styBannerTitle,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -113,7 +113,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 12),
                                 child: Text(
-                                  detailController.movieDetail.overview,
+                                  detailController.movieDetail!.overview!,
                                   style: styVoteAverage,
                                 ),
                               ),
@@ -136,7 +136,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                         Text(
                                           BaseFunctions.getReleaseDate(
                                               detailController
-                                                  .movieDetail.releaseDate),
+                                                  .movieDetail!.releaseDate!),
                                           style: styGoldText,
                                         ),
                                       ],
@@ -152,7 +152,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                         Text(
                                           BaseFunctions.getRuntime(
                                               detailController
-                                                  .movieDetail.runtime),
+                                                  .movieDetail!.runtime!),
                                           style: styGoldText,
                                         ),
                                       ],
@@ -168,7 +168,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                         Text(
                                           BaseFunctions.getBudget(
                                               detailController
-                                                  .movieDetail.budget),
+                                                  .movieDetail!.budget!),
                                           style: styGoldText,
                                         ),
                                       ],
@@ -178,8 +178,8 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                               ),
                               const SizedBox(height: 12),
                               Visibility(
-                                visible: detailController.movieDetail.movieImage
-                                    .backdrops.isNotEmpty,
+                                visible: detailController.movieDetail!
+                                    .movieImage.backdrops!.isNotEmpty,
                                 child: const Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12.0),
@@ -190,13 +190,13 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                 ),
                               ),
                               Visibility(
-                                visible: detailController.movieDetail.movieImage
-                                    .backdrops.isNotEmpty,
+                                visible: detailController.movieDetail!
+                                    .movieImage.backdrops!.isNotEmpty,
                                 child: const SizedBox(height: 6),
                               ),
                               Visibility(
-                                visible: detailController.movieDetail.movieImage
-                                    .backdrops.isNotEmpty,
+                                visible: detailController.movieDetail!
+                                    .movieImage.backdrops!.isNotEmpty,
                                 child: Container(
                                   height: 155,
                                   child: ListView.separated(
@@ -209,13 +209,13 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12),
                                     physics: const BouncingScrollPhysics(),
-                                    itemCount: detailController.movieDetail
-                                        .movieImage.backdrops.length,
+                                    itemCount: detailController.movieDetail!
+                                        .movieImage.backdrops!.length,
                                     itemBuilder: (context, index) {
                                       final Screenshot image = detailController
-                                          .movieDetail
+                                          .movieDetail!
                                           .movieImage
-                                          .backdrops[index];
+                                          .backdrops![index];
                                       return ClipRRect(
                                         borderRadius: BorderRadius.circular(8),
                                         child: CachedNetworkImage(
@@ -252,13 +252,14 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                     color: clrTransparent,
                                     width: 6,
                                   ),
+                                  physics: const BouncingScrollPhysics(),
                                   itemCount: detailController
-                                      .movieDetail.castList.length,
+                                      .movieDetail!.castList!.length,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12),
                                   itemBuilder: (context, index) {
                                     final Cast cast = detailController
-                                        .movieDetail.castList[index];
+                                        .movieDetail!.castList![index];
                                     return CastWidget(cast: cast);
                                   },
                                 ),

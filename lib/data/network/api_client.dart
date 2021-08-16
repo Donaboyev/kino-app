@@ -34,9 +34,9 @@ abstract class ApiClient {
     return dio;
   }
 
-  static ApiClient _apiClient;
+  static ApiClient? _apiClient;
 
-  static ApiClient getInstance({String baseUrl = Constants.BASE_URL}) {
+  static ApiClient? getInstance({String baseUrl = Constants.BASE_URL}) {
     if (_apiClient != null)
       return _apiClient;
     else {
@@ -73,7 +73,7 @@ abstract class ApiClient {
 
   @GET('discover/movie')
   Future<MovieResponse> getMoviesByGenre(
-    @Query('with_genres') int genreId,
+    @Query('with_genres') int? genreId,
     @Query('page') int page,
     @Query('api_key') String apiKey,
   );
@@ -89,31 +89,31 @@ abstract class ApiClient {
 
   @GET('movie/{movieId}')
   Future<MovieDetail> getMovieDetail(
-    @Path('movieId') int movieId,
+    @Path('movieId') int? movieId,
     @Query('api_key') String apiKey,
   );
 
   @GET('movie/{movieId}/videos')
   Future<TrailerResponse> getTrailerId(
-    @Path('movieId') int movieId,
+    @Path('movieId') int? movieId,
     @Query('api_key') String apiKey,
   );
 
   @GET('movie/{movieId}/images')
   Future<MovieImage> getMovieImage(
-    @Path('movieId') int movieId,
+    @Path('movieId') int? movieId,
     @Query('api_key') String apiKey,
   );
 
   @GET('movie/{movieId}/credits')
   Future<CastResponse> getCastList(
-    @Path('movieId') int movieId,
+    @Path('movieId') int? movieId,
     @Query('api_key') String apiKey,
   );
 
   @GET('person/{personId}')
   Future<PersonDetail> getPersonDetail(
-    @Path('personId') int personId,
+    @Path('personId') int? personId,
     @Query('api_key') String apiKey,
   );
 }

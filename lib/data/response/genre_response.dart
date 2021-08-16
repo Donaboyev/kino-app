@@ -1,5 +1,5 @@
 class GenreResponse {
-  List<Genre> genres;
+  List<Genre>? genres;
 
   GenreResponse({this.genres});
 
@@ -7,7 +7,7 @@ class GenreResponse {
     if (json['genres'] != null) {
       genres = <Genre>[];
       json['genres'].forEach((v) {
-        genres.add(new Genre.fromJson(v));
+        genres!.add(new Genre.fromJson(v));
       });
     } else {
       genres = [];
@@ -16,8 +16,8 @@ class GenreResponse {
 }
 
 class Genre {
-  final int id;
-  final String name;
+  final int? id;
+  final String? name;
 
   Genre({
     this.id,
@@ -25,9 +25,9 @@ class Genre {
   });
 
   factory Genre.fromJson(dynamic json) {
-    if (json == null) {
-      return Genre();
-    }
+    // if (json == null) {
+    //   return Genre();
+    // }
     return Genre(
       id: json['id'],
       name: json['name'],

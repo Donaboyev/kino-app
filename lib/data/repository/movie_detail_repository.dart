@@ -1,17 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:kino_app/data/remote/remote_source.dart';
 
 class MovieDetailRepository {
-  final RemoteSource remoteSource;
+  final RemoteSource? remoteSource;
 
-  const MovieDetailRepository({this.remoteSource})
-      : assert(remoteSource != null);
+  const MovieDetailRepository({this.remoteSource});
 
   Future<dynamic> getMovieDetail({
-    @required int movieId,
-    @required String apiKey,
+    required int? movieId,
+    required String apiKey,
   }) async {
-    final response = await remoteSource.getMovieDetail(
+    final response = await remoteSource!.getMovieDetail(
       movieId: movieId,
       apiKey: apiKey,
     );
@@ -22,10 +20,10 @@ class MovieDetailRepository {
   }
 
   Future<dynamic> getTrailerId({
-    @required int movieId,
-    @required String apiKey,
+    required int? movieId,
+    required String apiKey,
   }) async {
-    final response = await remoteSource.getTrailerId(
+    final response = await remoteSource!.getTrailerId(
       movieId: movieId,
       apiKey: apiKey,
     );
@@ -36,10 +34,10 @@ class MovieDetailRepository {
   }
 
   Future<dynamic> getMovieImage({
-    @required int movieId,
-    @required String apiKey,
+    required int? movieId,
+    required String apiKey,
   }) async {
-    final response = await remoteSource.getMovieImage(
+    final response = await remoteSource!.getMovieImage(
       movieId: movieId,
       apiKey: apiKey,
     );
@@ -50,10 +48,10 @@ class MovieDetailRepository {
   }
 
   Future<dynamic> getCastList({
-    @required int movieId,
-    @required String apiKey,
+    required int? movieId,
+    required String apiKey,
   }) async {
-    final response = await remoteSource.getCastList(
+    final response = await remoteSource!.getCastList(
       movieId: movieId,
       apiKey: apiKey,
     );

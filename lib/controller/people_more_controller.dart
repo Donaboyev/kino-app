@@ -1,21 +1,19 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/response/person_response.dart';
 import 'package:kino_app/data/repository/people_more_repository.dart';
+import 'package:kino_app/data/response/person_response.dart';
 
 class PeopleMoreController extends BaseController {
   final PeopleMoreRepository repository;
 
-  PeopleMoreController({@required this.repository})
-      : assert(repository != null);
+  PeopleMoreController({required this.repository});
 
-  ScrollController scrollController;
+  ScrollController? scrollController;
 
   final List<Person> _people = [];
-  int _totalPeoplePage = 1;
+  int? _totalPeoplePage = 1;
   int _peoplePage = 1;
   bool _hasNextPeople = true;
   final RxBool _isPeopleLoading = false.obs;
@@ -24,16 +22,16 @@ class PeopleMoreController extends BaseController {
   void onInit() async {
     await getTrendingPeople();
     scrollController = ScrollController();
-    scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) getTrendingPeople();
+    scrollController!.addListener(() {
+      if (scrollController!.position.maxScrollExtent ==
+          scrollController!.position.pixels) getTrendingPeople();
     });
     super.onInit();
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -52,8 +50,8 @@ class PeopleMoreController extends BaseController {
     if (result is PersonResponse) {
       _totalPeoplePage = result.totalPages;
       _peoplePage++;
-      if (_peoplePage > _totalPeoplePage) _hasNextPeople = false;
-      _people.addAll(result.people);
+      if (_peoplePage > _totalPeoplePage!) _hasNextPeople = false;
+      _people.addAll(result.people!);
       update();
     } else {
       print('===================> error: $result');

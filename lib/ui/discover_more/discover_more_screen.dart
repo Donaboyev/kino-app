@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/controller/discover_more_controller.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/data/response/genre_response.dart';
 import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/ui/widgets/more_movie_item_widget.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class DiscoverMorePage extends GetView<DiscoverMoreController> {
   @override
@@ -59,10 +59,10 @@ class DiscoverMorePage extends GetView<DiscoverMoreController> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 4),
                                   physics: const BouncingScrollPhysics(),
-                                  itemCount: moreController.genres.length,
+                                  itemCount: moreController.genres!.length,
                                   itemBuilder: (context, index) {
                                     final Genre genre =
-                                        moreController.genres[index];
+                                        moreController.genres![index];
                                     return Obx(
                                       () => Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -87,7 +87,7 @@ class DiscoverMorePage extends GetView<DiscoverMoreController> {
                                           highlightElevation: 0,
                                           child: Center(
                                             child: Text(
-                                              genre.name,
+                                              genre.name!,
                                               style: styGenreTitle,
                                             ),
                                           ),

@@ -1,26 +1,24 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/data/repository/discover_more_repository.dart';
 import 'package:kino_app/data/response/genre_response.dart';
 import 'package:kino_app/data/response/movie_response.dart';
-import 'package:kino_app/data/repository/discover_more_repository.dart';
 
 class DiscoverMoreController extends BaseController {
   final DiscoverMoreRepository repository;
 
-  DiscoverMoreController({@required this.repository})
-      : assert(repository != null);
+  DiscoverMoreController({required this.repository});
 
-  List<Genre> _genres = [];
+  List<Genre>? _genres = [];
   final List<Movie> _moviesByGenre = [];
   final RxInt _selectedGenreIndex = 0.obs;
   bool _hasNextDiscover = true;
   final RxBool _isDiscoverLoading = false.obs;
   int _discoverPage = 1;
-  int _totalDiscoverPage = 1;
-  ScrollController scrollController;
+  int? _totalDiscoverPage = 1;
+  ScrollController? scrollController;
   bool _isAnotherGenreClicked = false;
   bool _isDiscoverScrollable = false;
 
@@ -28,16 +26,16 @@ class DiscoverMoreController extends BaseController {
   void onInit() async {
     await getGenres();
     scrollController = ScrollController();
-    scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) getMoviesByGenre();
+    scrollController!.addListener(() {
+      if (scrollController!.position.maxScrollExtent ==
+          scrollController!.position.pixels) getMoviesByGenre();
     });
     super.onInit();
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -76,17 +74,17 @@ class DiscoverMoreController extends BaseController {
     final result = await repository.getMoviesByGenre(
       apiKey: Constants.API_KEY,
       page: _discoverPage,
-      genreId: genres[_selectedGenreIndex.value].id,
+      genreId: genres![_selectedGenreIndex.value].id,
     );
     _isDiscoverLoading.value = false;
     setLoading(false);
     if (result is MovieResponse) {
       _totalDiscoverPage = result.totalPages;
       _discoverPage++;
-      if (_discoverPage > _totalDiscoverPage) _hasNextDiscover = false;
-      _moviesByGenre.addAll(result.movies);
+      if (_discoverPage > _totalDiscoverPage!) _hasNextDiscover = false;
+      _moviesByGenre.addAll(result.movies!);
       if (_isDiscoverScrollable) {
-        scrollController.animateTo(
+        scrollController!.animateTo(
           0,
           duration: Duration(milliseconds: 1300),
           curve: Curves.easeOut,
@@ -99,7 +97,7 @@ class DiscoverMoreController extends BaseController {
     }
   }
 
-  List<Genre> get genres => _genres;
+  List<Genre>? get genres => _genres;
 
   List<Movie> get moviesByGenre => _moviesByGenre;
 

@@ -1,28 +1,27 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/data/repository/home_repository.dart';
 import 'package:kino_app/data/response/genre_response.dart';
 import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/data/response/person_response.dart';
-import 'package:kino_app/data/repository/home_repository.dart';
 
 class HomeController extends BaseController {
   final HomeRepository repository;
 
-  HomeController({@required this.repository}) : assert(repository != null);
+  HomeController({required this.repository});
 
   final List<Movie> _upcomingMovies = [];
 
-  List<Genre> _genres = [];
+  List<Genre>? _genres = [];
   final List<Movie> _moviesByGenre = [];
   final RxInt _selectedGenreIndex = 0.obs;
   bool _hasNextDiscover = true;
   final RxBool _isDiscoverLoading = false.obs;
   int _discoverPage = 1;
-  int _totalDiscoverPage = 1;
-  ScrollController scrollController;
+  int? _totalDiscoverPage = 1;
+  ScrollController? scrollController;
   bool _isAnotherGenreClicked = false;
   bool _isDiscoverScrollable = false;
 
@@ -30,22 +29,22 @@ class HomeController extends BaseController {
   bool _hasNextNowPlaying = true;
   final RxBool _isNowPlayingLoading = false.obs;
   int _nowPlayingPage = 1;
-  int _totalNowPlayingPage = 1;
+  int? _totalNowPlayingPage = 1;
 
   final List<Person> _people = [];
-  int _totalPeoplePage = 1;
+  int? _totalPeoplePage = 1;
   int _peoplePage = 1;
   bool _hasNextPeople = true;
   final RxBool _isPeopleLoading = false.obs;
 
   int _topRatedPage = 1;
-  int _totalTopRatedPage = 1;
+  int? _totalTopRatedPage = 1;
   bool _hasNextTopRated = true;
   final RxBool _isTopRatedLoading = false.obs;
   final List<Movie> _topRatedMovies = [];
 
   int _popularPage = 1;
-  int _totalPopularPage = 1;
+  int? _totalPopularPage = 1;
   bool _hasNexPopular = true;
   final RxBool _isPopularLoading = false.obs;
   final List<Movie> _popularMovies = [];
@@ -64,7 +63,7 @@ class HomeController extends BaseController {
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -74,7 +73,7 @@ class HomeController extends BaseController {
         await repository.getUpcomingMovies(apiKey: Constants.API_KEY);
     setLoading(false);
     if (result is MovieResponse) {
-      _upcomingMovies.addAll(result.movies);
+      _upcomingMovies.addAll(result.movies!);
       update();
     } else {
       print('===================> error: $result');
@@ -96,8 +95,8 @@ class HomeController extends BaseController {
     if (result is MovieResponse) {
       _totalTopRatedPage = result.totalPages;
       _topRatedPage++;
-      if (_topRatedPage > _totalTopRatedPage) _hasNextTopRated = false;
-      _topRatedMovies.addAll(result.movies);
+      if (_topRatedPage > _totalTopRatedPage!) _hasNextTopRated = false;
+      _topRatedMovies.addAll(result.movies!);
       update();
     } else {
       print('===================> error: $result');
@@ -119,8 +118,8 @@ class HomeController extends BaseController {
     if (result is MovieResponse) {
       _totalPopularPage = result.totalPages;
       _popularPage++;
-      if (_popularPage > _totalPopularPage) _hasNexPopular = false;
-      _popularMovies.addAll(result.movies);
+      if (_popularPage > _totalPopularPage!) _hasNexPopular = false;
+      _popularMovies.addAll(result.movies!);
       update();
     } else {
       print('===================> error: $result');
@@ -142,8 +141,8 @@ class HomeController extends BaseController {
     if (result is MovieResponse) {
       _totalNowPlayingPage = result.totalPages;
       _nowPlayingPage++;
-      if (_nowPlayingPage > _totalNowPlayingPage) _hasNextNowPlaying = false;
-      _nowPlayingMovies.addAll(result.movies);
+      if (_nowPlayingPage > _totalNowPlayingPage!) _hasNextNowPlaying = false;
+      _nowPlayingMovies.addAll(result.movies!);
       update();
     } else {
       print('===================> error: $result');
@@ -185,17 +184,17 @@ class HomeController extends BaseController {
     final result = await repository.getMoviesByGenre(
       apiKey: Constants.API_KEY,
       page: _discoverPage,
-      genreId: genres[_selectedGenreIndex.value].id,
+      genreId: genres![_selectedGenreIndex.value].id,
     );
     _isDiscoverLoading.value = false;
     setLoading(false);
     if (result is MovieResponse) {
       _totalDiscoverPage = result.totalPages;
       _discoverPage++;
-      if (_discoverPage > _totalDiscoverPage) _hasNextDiscover = false;
-      _moviesByGenre.addAll(result.movies);
+      if (_discoverPage > _totalDiscoverPage!) _hasNextDiscover = false;
+      _moviesByGenre.addAll(result.movies!);
       if (_isDiscoverScrollable) {
-        scrollController.animateTo(
+        scrollController!.animateTo(
           0,
           duration: Duration(milliseconds: 1300),
           curve: Curves.easeOut,
@@ -223,8 +222,8 @@ class HomeController extends BaseController {
     if (result is PersonResponse) {
       _totalPeoplePage = result.totalPages;
       _peoplePage++;
-      if (_peoplePage > _totalPeoplePage) _hasNextPeople = false;
-      _people.addAll(result.people);
+      if (_peoplePage > _totalPeoplePage!) _hasNextPeople = false;
+      _people.addAll(result.people!);
       update();
     } else {
       print('===================> error: $result');
@@ -233,7 +232,7 @@ class HomeController extends BaseController {
 
   List<Movie> get upcomingMovies => _upcomingMovies;
 
-  List<Genre> get genres => _genres;
+  List<Genre>? get genres => _genres;
 
   List<Person> get people => _people;
 

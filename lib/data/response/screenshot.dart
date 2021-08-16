@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 class Screenshot extends Equatable {
-  final String aspect;
-  final String imagePath;
-  final int height;
-  final int width;
-  final String countryCode;
-  final double voteAverage;
-  final int voteCount;
+  final String? aspect;
+  final String? imagePath;
+  final int? height;
+  final int? width;
+  final String? countryCode;
+  final double? voteAverage;
+  final int? voteCount;
 
   Screenshot({
     this.aspect,
@@ -20,9 +20,9 @@ class Screenshot extends Equatable {
   });
 
   factory Screenshot.fromJson(Map<String, dynamic> json) {
-    if (json == null) {
-      return Screenshot();
-    }
+    // if (json == null) {
+    //   return Screenshot();
+    // }
 
     return Screenshot(
       aspect: json['aspect_ratio'].toString(),
@@ -37,7 +37,7 @@ class Screenshot extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         aspect,
         imagePath,
         height,

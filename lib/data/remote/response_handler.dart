@@ -1,8 +1,8 @@
 import 'package:kino_app/data/remote/server_error.dart';
 
 class ResponseHandler<T> {
-  ServerError _error;
-  T data;
+  ServerError? _error;
+  T? data;
 
   setException(ServerError error) {
     _error = error;
@@ -12,5 +12,5 @@ class ResponseHandler<T> {
     this.data = data;
   }
 
-  ServerError getException() => _error;
+  ServerError? getException() => _error;
 }

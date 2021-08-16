@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/controller/home_controller.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/data/response/movie_response.dart';
-import 'package:kino_app/ui/home/widgets/movie_item_widget.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
+import 'package:kino_app/ui/home/widgets/item_widgets/movie_item_widget.dart';
 
 class DiscoverWidget extends StatelessWidget {
   @override

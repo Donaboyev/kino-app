@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class MoreMovieItemWidget extends StatelessWidget {
-  final Movie movie;
+  final Movie? movie;
 
-  const MoreMovieItemWidget({Key key, this.movie}) : super(key: key);
+  const MoreMovieItemWidget({Key? key, this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MoreMovieItemWidget extends StatelessWidget {
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      '${Constants.BIG_IMAGE_BASE_URL}${movie.backdropPath ?? movie.posterPath}',
+                      '${Constants.BIG_IMAGE_BASE_URL}${movie!.backdropPath ?? movie!.posterPath}',
                   imageBuilder: (context, imageProvider) {
                     return Container(
                       width: 140,
@@ -61,7 +61,7 @@ class MoreMovieItemWidget extends StatelessWidget {
                     children: [
                       Container(
                         child: Text(
-                          movie.title.toUpperCase(),
+                          movie!.title!.toUpperCase(),
                           style: styMovieTitle,
                           maxLines: 2,
                           overflow: TextOverflow.fade,
@@ -76,7 +76,7 @@ class MoreMovieItemWidget extends StatelessWidget {
                                 Icons.star,
                                 color: clrRating,
                               ),
-                              rating: (double.parse(movie.voteAverage) / 2),
+                              rating: (double.parse(movie!.voteAverage!) / 2),
                               itemCount: 5,
                               itemSize: 18,
                               unratedColor: clrUnrated,
@@ -84,16 +84,16 @@ class MoreMovieItemWidget extends StatelessWidget {
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              movie.voteAverage.toString(),
+                              movie!.voteAverage.toString(),
                               style: styVoteAverage,
                             ),
                           ],
                         ),
                       ),
                       Visibility(
-                        visible: movie.overview != null,
+                        visible: movie!.overview != null,
                         child: Text(
-                          movie.overview,
+                          movie!.overview!,
                           style: styMovieDescription,
                           maxLines: 7,
                           overflow: TextOverflow.fade,
@@ -115,7 +115,7 @@ class MoreMovieItemWidget extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () =>
-                    Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie.id),
+                    Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie!.id),
               ),
             ),
           )

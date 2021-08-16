@@ -1,20 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
-import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/data/response/person_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class MorePeopleItemWidget extends StatelessWidget {
-  final Person person;
+  final Person? person;
 
-  const MorePeopleItemWidget({Key key, this.person}) : super(key: key);
+  const MorePeopleItemWidget({Key? key, this.person}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class MorePeopleItemWidget extends StatelessWidget {
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      '${Constants.BIG_IMAGE_BASE_URL}${person.profilePath}',
+                      '${Constants.BIG_IMAGE_BASE_URL}${person!.profilePath}',
                   imageBuilder: (context, imageProvider) {
                     return Container(
                       width: 140,
@@ -62,16 +60,16 @@ class MorePeopleItemWidget extends StatelessWidget {
                     children: [
                       Container(
                         child: Text(
-                          person.name.toUpperCase(),
+                          person!.name!.toUpperCase(),
                           style: styMorePersonName,
                           maxLines: 2,
                           overflow: TextOverflow.fade,
                         ),
                       ),
                       Visibility(
-                        visible: person.knowForDepartment != null,
+                        visible: person!.knowForDepartment != null,
                         child: Text(
-                          person.knowForDepartment,
+                          person!.knowForDepartment!,
                           style: styVoteAverage,
                           maxLines: 7,
                           overflow: TextOverflow.fade,
@@ -93,7 +91,7 @@ class MorePeopleItemWidget extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () =>
-                    Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: person.id),
+                    Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: person!.id),
               ),
             ),
           )

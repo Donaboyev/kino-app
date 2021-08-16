@@ -3,10 +3,10 @@ import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 
 class CategoryTitleWidget extends StatelessWidget {
-  final String title;
-  final Function onTap;
+  final String? title;
+  final Function? onTap;
 
-  const CategoryTitleWidget({Key key, this.title, this.onTap})
+  const CategoryTitleWidget({Key? key, this.title, this.onTap})
       : super(key: key);
 
   @override
@@ -19,10 +19,10 @@ class CategoryTitleWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: stySectionTitle),
+              Text(title!, style: stySectionTitle),
               IconButton(
                 iconSize: 32,
-                onPressed: onTap,
+                onPressed: onTap as void Function()?,
                 icon: const Icon(
                   Icons.arrow_right_alt_outlined,
                   color: clrWhite,

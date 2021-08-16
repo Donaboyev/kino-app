@@ -1,13 +1,13 @@
 class PersonDetail {
-  final int id;
-  final bool adult;
-  final List<String> knownAs;
-  final String biography;
-  final String birthday;
-  final String knownForDepartment;
-  final String name;
-  final String placeOfBirth;
-  final String profilePath;
+  final int? id;
+  final bool? adult;
+  final List<String>? knownAs;
+  final String? biography;
+  final String? birthday;
+  final String? knownForDepartment;
+  final String? name;
+  final String? placeOfBirth;
+  final String? profilePath;
 
   PersonDetail({
     this.adult,

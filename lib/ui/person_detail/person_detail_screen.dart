@@ -4,16 +4,14 @@ import 'package:get/get.dart';
 import 'package:kino_app/base/base_functions.dart';
 import 'package:kino_app/controller/person_detail_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class PersonDetailPage extends GetView<PersonDetailController> {
-  const PersonDetailPage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    final int personId = Get.arguments;
+    final int? personId = Get.arguments;
     controller.setPersonId(personId);
     return GetBuilder<PersonDetailController>(
       builder: (detailController) => detailController.isLoading.value
@@ -29,12 +27,12 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                         children: [
                           Visibility(
                             visible:
-                                detailController.person.profilePath != null,
+                                detailController.person!.profilePath != null,
                             child: ClipPath(
                               child: ClipRRect(
                                 child: CachedNetworkImage(
                                   imageUrl:
-                                      '${Constants.ORIGINAL_IMAGE_BASE_URL}${detailController.person.profilePath ?? ''}',
+                                      '${Constants.ORIGINAL_IMAGE_BASE_URL}${detailController.person!.profilePath ?? ''}',
                                   height: Get.height / 2,
                                   width: Get.width,
                                   fit: BoxFit.cover,
@@ -75,7 +73,7 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                     child: Column(
                                       children: <Widget>[
                                         Text(
-                                          detailController.person.name,
+                                          detailController.person!.name!,
                                           style: styBannerTitle,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -104,7 +102,7 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                   children: <Widget>[
                                     Visibility(
                                       visible:
-                                          detailController.person.birthday !=
+                                          detailController.person!.birthday !=
                                               null,
                                       child: Expanded(
                                         child: Column(
@@ -118,7 +116,7 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                             Text(
                                               BaseFunctions.getReleaseDate(
                                                   detailController
-                                                          .person.birthday ??
+                                                          .person!.birthday ??
                                                       ''),
                                               style: styGoldText,
                                             ),
@@ -129,7 +127,7 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                     const SizedBox(width: 6),
                                     Visibility(
                                       visible: detailController
-                                              .person.placeOfBirth !=
+                                              .person!.placeOfBirth !=
                                           null,
                                       child: Expanded(
                                         child: Column(
@@ -142,7 +140,7 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                             ),
                                             Text(
                                               detailController
-                                                      .person.placeOfBirth ??
+                                                      .person!.placeOfBirth ??
                                                   'No data',
                                               style: styGoldText,
                                               maxLines: 3,
@@ -157,8 +155,8 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                               ),
                               const SizedBox(height: 12),
                               Visibility(
-                                visible:
-                                    detailController.person.knownAs.isNotEmpty,
+                                visible: detailController
+                                    .person!.knownAs!.isNotEmpty,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12.0),
@@ -169,13 +167,13 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                 ),
                               ),
                               Visibility(
-                                visible:
-                                    detailController.person.knownAs.isNotEmpty,
+                                visible: detailController
+                                    .person!.knownAs!.isNotEmpty,
                                 child: const SizedBox(height: 6),
                               ),
                               Visibility(
-                                visible:
-                                    detailController.person.knownAs.isNotEmpty,
+                                visible: detailController
+                                    .person!.knownAs!.isNotEmpty,
                                 child: Container(
                                   height: 36,
                                   child: ListView.separated(
@@ -188,11 +186,11 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12),
                                     physics: const BouncingScrollPhysics(),
-                                    itemCount:
-                                        detailController.person.knownAs.length,
+                                    itemCount: detailController
+                                        .person!.knownAs!.length,
                                     itemBuilder: (context, index) {
                                       String nickname = detailController
-                                          .person.knownAs[index];
+                                          .person!.knownAs![index];
                                       return Container(
                                         decoration: BoxDecoration(
                                           color: clrPink,
@@ -214,12 +212,12 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                               const SizedBox(height: 12),
                               Visibility(
                                 visible:
-                                    detailController.person.biography != null,
+                                    detailController.person!.biography != null,
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12),
                                   child: Text(
-                                    detailController.person.biography,
+                                    detailController.person!.biography!,
                                     style: styVoteAverage,
                                   ),
                                 ),

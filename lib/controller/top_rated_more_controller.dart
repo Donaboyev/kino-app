@@ -1,20 +1,18 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/data/repository/top_rated_more_repository.dart';
+import 'package:kino_app/data/response/movie_response.dart';
 
 class TopRatedMoreController extends BaseController {
   final TopRatedMoreRepository repository;
 
-  TopRatedMoreController({@required this.repository})
-      : assert(repository != null);
+  TopRatedMoreController({required this.repository});
 
-  ScrollController scrollController;
+  ScrollController? scrollController;
   int _topRatedPage = 1;
-  int _totalTopRatedPage = 1;
+  int? _totalTopRatedPage = 1;
   bool _hasNextTopRated = true;
   final RxBool _isTopRatedLoading = false.obs;
   final List<Movie> _topRatedMovies = [];
@@ -23,16 +21,16 @@ class TopRatedMoreController extends BaseController {
   void onInit() async {
     await getTopRatedMovies();
     scrollController = ScrollController();
-    scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) getTopRatedMovies();
+    scrollController!.addListener(() {
+      if (scrollController!.position.maxScrollExtent ==
+          scrollController!.position.pixels) getTopRatedMovies();
     });
     super.onInit();
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -51,8 +49,8 @@ class TopRatedMoreController extends BaseController {
     if (result is MovieResponse) {
       _totalTopRatedPage = result.totalPages;
       _topRatedPage++;
-      if (_topRatedPage > _totalTopRatedPage) _hasNextTopRated = false;
-      _topRatedMovies.addAll(result.movies);
+      if (_topRatedPage > _totalTopRatedPage!) _hasNextTopRated = false;
+      _topRatedMovies.addAll(result.movies!);
       update();
     } else {
       print('===================> error: $result');

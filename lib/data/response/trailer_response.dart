@@ -1,6 +1,6 @@
 class TrailerResponse {
-  List<Trailer> trailers;
-  int id;
+  List<Trailer>? trailers;
+  int? id;
 
   TrailerResponse({this.trailers, this.id});
 
@@ -8,7 +8,7 @@ class TrailerResponse {
     if (json['results'] != null) {
       trailers = <Trailer>[];
       json['results'].forEach((v) {
-        trailers.add(new Trailer.fromJson(v));
+        trailers!.add(new Trailer.fromJson(v));
       });
     } else {
       trailers = [];
@@ -18,16 +18,16 @@ class TrailerResponse {
 }
 
 class Trailer {
-  final String iso6391;
-  final String iso31661;
-  final String name;
-  final String key;
-  final String site;
-  final int size;
-  final String type;
-  final bool official;
-  final String publishedAt;
-  final String id;
+  final String? iso6391;
+  final String? iso31661;
+  final String? name;
+  final String? key;
+  final String? site;
+  final int? size;
+  final String? type;
+  final bool? official;
+  final String? publishedAt;
+  final String? id;
 
   Trailer({
     this.iso6391,
@@ -43,9 +43,9 @@ class Trailer {
   });
 
   factory Trailer.fromJson(dynamic json) {
-    if (json == null) {
-      return Trailer();
-    }
+    // if (json == null) {
+    //   return Trailer();
+    // }
 
     return Trailer(
       id: json['id'].toString(),

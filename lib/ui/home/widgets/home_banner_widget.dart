@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/controller/home_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class HomeBannerWidget extends StatelessWidget {
   @override
@@ -56,7 +56,7 @@ class HomeBannerWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
                   child: Text(
-                    movie.title,
+                    movie.title!,
                     style: styBannerTitle,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

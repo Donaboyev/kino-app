@@ -1,19 +1,17 @@
-import 'package:flutter/foundation.dart';
 import 'package:kino_app/base/base_controller.dart';
 import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/response/person_detail.dart';
 import 'package:kino_app/data/repository/person_detail_repository.dart';
+import 'package:kino_app/data/response/person_detail.dart';
 
 class PersonDetailController extends BaseController {
   final PersonDetailRepository repository;
 
-  PersonDetailController({@required this.repository})
-      : assert(repository != null);
+  PersonDetailController({required this.repository});
 
-  PersonDetail _personDetail;
-  int _personId;
+  PersonDetail? _personDetail;
+  int? _personId;
 
-  void setPersonId(int value) async {
+  void setPersonId(int? value) async {
     _personId = value;
     await getPersonDetail();
   }
@@ -33,5 +31,5 @@ class PersonDetailController extends BaseController {
     }
   }
 
-  PersonDetail get person => _personDetail;
+  PersonDetail? get person => _personDetail;
 }

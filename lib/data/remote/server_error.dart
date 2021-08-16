@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 
 class ServerError implements Exception {
-  int _errorCode;
+  int? _errorCode;
   String _errorMessage = '';
 
-  ServerError.withError({DioError error}) {
-    _handleError(error);
+  ServerError.withError({required Object error}) {
+    _handleError(error as DioError);
   }
 
   _handleError(DioError error) {
@@ -27,9 +27,9 @@ class ServerError implements Exception {
           //   break;
           // }
           if (error.response?.data['Error'] is Map<String, dynamic>) {
-            _errorMessage = error.response.data['Error']['Message'].toString();
+            _errorMessage = error.response!.data['Error']['Message'].toString();
           } else {
-            _errorMessage = error.response.data['Message'].toString();
+            _errorMessage = error.response!.data['Message'].toString();
           }
           break;
         }
@@ -43,7 +43,7 @@ class ServerError implements Exception {
     return _errorMessage;
   }
 
-  int getErrorCode() => _errorCode;
+  int? getErrorCode() => _errorCode;
 
   String getErrorMessage() => _errorMessage;
 }

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/data/response/movie_response.dart';
 import 'package:kino_app/routes/app_routes.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class MovieItemWidget extends StatelessWidget {
-  final Movie movie;
+  final Movie? movie;
 
-  const MovieItemWidget({Key key, this.movie}) : super(key: key);
+  const MovieItemWidget({Key? key, this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class MovieItemWidget extends StatelessWidget {
             ClipRRect(
               child: CachedNetworkImage(
                 imageUrl:
-                    '${Constants.BIG_IMAGE_BASE_URL}${movie.backdropPath ?? movie.posterPath}',
+                    '${Constants.BIG_IMAGE_BASE_URL}${movie!.backdropPath ?? movie!.posterPath}',
                 imageBuilder: (context, imageProvider) {
                   return Container(
                     width: 180,
@@ -54,7 +54,7 @@ class MovieItemWidget extends StatelessWidget {
             Container(
               width: 180,
               child: Text(
-                movie.title.toUpperCase(),
+                movie!.title!.toUpperCase(),
                 style: styMovieTitle,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -70,7 +70,7 @@ class MovieItemWidget extends StatelessWidget {
                         Icons.star,
                         color: clrRating,
                       ),
-                      rating: (double.parse(movie.voteAverage) / 2),
+                      rating: (double.parse(movie!.voteAverage!) / 2),
                       itemCount: 5,
                       itemSize: 18,
                       unratedColor: clrUnrated,
@@ -78,7 +78,7 @@ class MovieItemWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      movie.voteAverage.toString(),
+                      movie!.voteAverage.toString(),
                       style: styVoteAverage,
                     ),
                   ],
@@ -93,7 +93,7 @@ class MovieItemWidget extends StatelessWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
               onTap: () =>
-                  Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie.id),
+                  Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie!.id),
             ),
           ),
         )

@@ -1,6 +1,6 @@
 class MovieResponse {
-  List<Movie> movies;
-  int totalPages;
+  List<Movie>? movies;
+  int? totalPages;
 
   MovieResponse({this.movies});
 
@@ -8,7 +8,7 @@ class MovieResponse {
     if (json['results'] != null) {
       movies = <Movie>[];
       json['results'].forEach((v) {
-        movies.add(new Movie.fromJson(v));
+        movies!.add(new Movie.fromJson(v));
       });
     } else {
       movies = [];
@@ -18,18 +18,18 @@ class MovieResponse {
 }
 
 class Movie {
-  final String backdropPath;
-  final int id;
-  final String originalLanguage;
-  final String originalTitle;
-  final String overview;
-  final num popularity;
-  final String posterPath;
-  final String releaseDate;
-  final String title;
-  final bool video;
-  final int voteCount;
-  final String voteAverage;
+  final String? backdropPath;
+  final int? id;
+  final String? originalLanguage;
+  final String? originalTitle;
+  final String? overview;
+  final num? popularity;
+  final String? posterPath;
+  final String? releaseDate;
+  final String? title;
+  final bool? video;
+  final int? voteCount;
+  final String? voteAverage;
 
   Movie({
     this.backdropPath,
@@ -47,9 +47,9 @@ class Movie {
   });
 
   factory Movie.fromJson(dynamic json) {
-    if (json == null) {
-      return Movie();
-    }
+    // if (json == null) {
+    //   return Movie();
+    // }
 
     return Movie(
       backdropPath: json['backdrop_path'],

@@ -2,20 +2,20 @@ import 'package:kino_app/data/response/cast_response.dart';
 import 'package:kino_app/data/response/movie_image.dart';
 
 class MovieDetail {
-  final String id;
-  final String title;
-  final String backdropPath;
-  final int budget;
-  final String homePage;
-  final String originalTitle;
-  final String overview;
-  final String releaseDate;
-  final int runtime;
-  final String voteAverage;
-  final String voteCount;
-  String trailerId;
-  MovieImage movieImage;
-  List<Cast> castList;
+  final String? id;
+  final String? title;
+  final String? backdropPath;
+  final int? budget;
+  final String? homePage;
+  final String? originalTitle;
+  final String? overview;
+  final String? releaseDate;
+  final int? runtime;
+  final String? voteAverage;
+  final String? voteCount;
+  String? trailerId;
+  late MovieImage movieImage;
+  List<Cast>? castList;
 
   MovieDetail({
     this.id,

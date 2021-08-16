@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kino_app/controller/home_controller.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
 import 'package:kino_app/core/theme/app_colors.dart';
 import 'package:kino_app/core/theme/text_styles.dart';
 import 'package:kino_app/ui/home/widgets/discover_widget.dart';
@@ -11,7 +12,6 @@ import 'package:kino_app/ui/home/widgets/now_playing_widget.dart';
 import 'package:kino_app/ui/home/widgets/people_widget.dart';
 import 'package:kino_app/ui/home/widgets/popular_widget.dart';
 import 'package:kino_app/ui/home/widgets/top_rated_widget.dart';
-import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 class HomePage extends GetView<HomeController> {
   @override

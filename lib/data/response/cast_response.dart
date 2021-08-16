@@ -1,5 +1,5 @@
 class CastResponse {
-  List<Cast> casts;
+  List<Cast>? casts;
 
   CastResponse({this.casts});
 
@@ -7,7 +7,7 @@ class CastResponse {
     if (json['cast'] != null) {
       casts = <Cast>[];
       json['cast'].forEach((v) {
-        casts.add(new Cast.fromJson(v));
+        casts!.add(new Cast.fromJson(v));
       });
     } else {
       casts = [];
@@ -16,10 +16,10 @@ class CastResponse {
 }
 
 class Cast {
-  final int id;
-  final String name;
-  final String profilePath;
-  final String character;
+  final int? id;
+  final String? name;
+  final String? profilePath;
+  final String? character;
 
   Cast({
     this.id,
@@ -29,9 +29,9 @@ class Cast {
   });
 
   factory Cast.fromJson(dynamic json) {
-    if (json == null) {
-      return Cast();
-    }
+    // if (json == null) {
+    //   return Cast();
+    // }
 
     return Cast(
       id: json['id'],
