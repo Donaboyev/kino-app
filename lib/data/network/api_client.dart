@@ -1,5 +1,6 @@
 import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:kino_app/core/constants/constants.dart';
 import 'package:kino_app/data/response/cast_response.dart';
 import 'package:kino_app/data/response/genre_response.dart';
@@ -23,7 +24,7 @@ abstract class ApiClient {
 
   static get getDio {
     Dio dio = Dio(BaseOptions(followRedirects: false));
-    dio.interceptors.add(alice.getDioInterceptor());
+    if (kDebugMode) dio.interceptors.add(alice.getDioInterceptor());
     dio.interceptors.add(
       LogInterceptor(
         responseBody: true,
