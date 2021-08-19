@@ -1,7 +1,7 @@
 # Kino App
 In this app, you can get information about popular movies based on the information provided on themoviedb.org.
 
-<img src="https://user-images.githubusercontent.com/56734609/130063030-2100740d-6fda-45f7-b6d6-8bf755fc48ac.png" width="450" height="800" />
+<img src="https://user-images.githubusercontent.com/56734609/130063030-2100740d-6fda-45f7-b6d6-8bf755fc48ac.png" width="800" height="450" />
 
 Download 🔗
 ------
