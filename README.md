@@ -1,9 +1,11 @@
 # Kino App
 In this app, you can get information about popular movies based on the information provided on themoviedb.org.
 
+<p>
 <img src="https://user-images.githubusercontent.com/56734609/130063030-2100740d-6fda-45f7-b6d6-8bf755fc48ac.png" width="800" height="450" />
+</p>
 
-Download 🔗
+Download
 ------
 <a href='https://play.google.com/store/apps/details?id=com.donaboyev.kinoapp'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100"/></a>
 
