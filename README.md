@@ -28,6 +28,6 @@ To run this application:
 1. Clone this project
 2. Get your api key from the website: themoviedb.org (https://www.themoviedb.org/settings/api)
 3. Put your api key instead of  static const API_KEY = 'YOUR_API_KEY'; in constants.dart file
-4. And run flutter pub get & flutter pub run
+4. And run `flutter pub get & flutter pub run`
 
-Join us in telegram @android_projects
+Join us in telegram [@android_projects](https://t.me/android_projects)
