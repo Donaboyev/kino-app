@@ -13,14 +13,14 @@ This is a completely open source project. You can use this structure of code in 
 
 If you want to contribute this project, any kind of pull requests are accepted.
 You can add one of these features in your request:
-1. Search movie
-2. Save favorite movies 
-3. Login 
-4. Rate movie
-5. Watch trailer in app
-6. Save photo
-7. Preparing release for iOS, Linux, Web, Windows
-8. ... (any kind of ideas will be accepted)
+* Search movie
+* Save favorite movies 
+* Login 
+* Rate movie
+* Watch trailer in app
+* Save photo
+* Preparing release for iOS, Linux, Web, Windows
+* ... (any kind of ideas will be accepted)
 
 It has also submitted to itsallwidgets.com: https://itsallwidgets.com/kino-app
 
