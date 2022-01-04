@@ -22,10 +22,6 @@ class ServerError implements Exception {
         break;
       case DioErrorType.response:
         {
-          // if (error.message.contains('500')) {
-          //   _errorMessage = "Server not working";
-          //   break;
-          // }
           if (error.response?.data['Error'] is Map<String, dynamic>) {
             _errorMessage = error.response!.data['Error']['Message'].toString();
           } else {

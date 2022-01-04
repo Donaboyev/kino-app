@@ -1,14 +1,14 @@
-import 'package:kino_app/data/network/api_client.dart';
-import 'package:kino_app/data/remote/response_handler.dart';
-import 'package:kino_app/data/remote/server_error.dart';
-import 'package:kino_app/data/response/cast_response.dart';
-import 'package:kino_app/data/response/genre_response.dart';
-import 'package:kino_app/data/response/movie_detail.dart';
-import 'package:kino_app/data/response/movie_image.dart';
-import 'package:kino_app/data/response/movie_response.dart';
-import 'package:kino_app/data/response/person_detail.dart';
-import 'package:kino_app/data/response/person_response.dart';
-import 'package:kino_app/data/response/trailer_response.dart';
+import '../response/trailer_response.dart';
+import '../response/person_response.dart';
+import '../response/genre_response.dart';
+import '../response/movie_response.dart';
+import '../response/person_detail.dart';
+import '../response/cast_response.dart';
+import '../response/movie_detail.dart';
+import '../response/movie_image.dart';
+import '../network/api_client.dart';
+import 'response_handler.dart';
+import 'server_error.dart';
 
 class RemoteSource {
   ApiClient apiClient;
