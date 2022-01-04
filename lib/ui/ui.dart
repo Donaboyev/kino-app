@@ -1,0 +1,9 @@
+export '../controller/home_controller.dart';
+export '../core/theme/app_colors.dart';
+export '../core/theme/text_styles.dart';
+export '../core/custom_widgets/nuts_activity_indicator.dart';
+export '../routes/app_routes.dart';
+export '../data/response/movie_response.dart';
+export '../data/response/person_response.dart';
+export '../core/constants/constants.dart';
+export '../data/response/genre_response.dart';

@@ -1,14 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
-import 'package:kino_app/controller/home_controller.dart';
-import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
-import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/core/theme/text_styles.dart';
-import 'package:kino_app/data/response/genre_response.dart';
-import 'package:kino_app/routes/app_routes.dart';
-import 'package:kino_app/ui/home/widgets/item_widgets/category_title_widget.dart';
+
+import 'item_widgets/category_title_widget.dart';
+import '../../ui.dart';
 
 class GenresWidget extends GetView<HomeController> {
   @override

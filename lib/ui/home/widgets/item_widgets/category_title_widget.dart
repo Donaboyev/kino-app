@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/core/theme/text_styles.dart';
+
+import '../../../ui.dart';
 
 class CategoryTitleWidget extends StatelessWidget {
   final String? title;
