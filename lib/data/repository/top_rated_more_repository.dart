@@ -1,4 +1,4 @@
-import 'package:kino_app/data/remote/remote_source.dart';
+import '../remote/remote_source.dart';
 
 class TopRatedMoreRepository {
   final RemoteSource remoteSource;
