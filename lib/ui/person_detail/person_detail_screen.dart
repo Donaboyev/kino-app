@@ -1,12 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kino_app/base/base_functions.dart';
-import 'package:kino_app/controller/person_detail_controller.dart';
-import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
-import 'package:kino_app/core/theme/app_colors.dart';
-import 'package:kino_app/core/theme/text_styles.dart';
+
+import '../ui.dart';
 
 class PersonDetailPage extends GetView<PersonDetailController> {
   @override
@@ -41,7 +37,8 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                   errorWidget: (context, url, error) =>
                                       Container(
                                     child: Image.asset(
-                                        'assets/images/png/no_image.png'),
+                                      'assets/images/png/no_image.png',
+                                    ),
                                   ),
                                 ),
                                 borderRadius: const BorderRadius.only(
@@ -94,7 +91,8 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 12.0),
+                                  horizontal: 12.0,
+                                ),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -159,7 +157,8 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                     .person!.knownAs!.isNotEmpty,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0),
+                                    horizontal: 12.0,
+                                  ),
                                   child: const Text(
                                     'Also known as',
                                     style: styVoteAverage,
@@ -184,7 +183,8 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                     ),
                                     scrollDirection: Axis.horizontal,
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 12),
+                                      horizontal: 12,
+                                    ),
                                     physics: const BouncingScrollPhysics(),
                                     itemCount: detailController
                                         .person!.knownAs!.length,
@@ -215,7 +215,8 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                     detailController.person!.biography != null,
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 12),
+                                    horizontal: 12,
+                                  ),
                                   child: Text(
                                     detailController.person!.biography!,
                                     style: styVoteAverage,

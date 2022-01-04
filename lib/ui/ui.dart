@@ -13,3 +13,7 @@ export '../base/base_functions.dart';
 export '../data/response/screenshot.dart';
 export '../data/response/cast_response.dart';
 export '../controller/now_playing_more_controller.dart';
+export '../controller/people_more_controller.dart';
+export '../controller/person_detail_controller.dart';
+export '../controller/popular_more_controller.dart';
+export '../controller/top_rated_more_controller.dart';
