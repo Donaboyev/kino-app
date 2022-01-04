@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kino_app/core/theme/app_colors.dart';
+
+import 'app_colors.dart';
 
 const styAppBarTitle = TextStyle(
   color: clrBlack,

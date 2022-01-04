@@ -1,16 +1,17 @@
+import 'package:flutter/foundation.dart';
+import 'package:retrofit/http.dart';
 import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/response/cast_response.dart';
-import 'package:kino_app/data/response/genre_response.dart';
-import 'package:kino_app/data/response/movie_detail.dart';
-import 'package:kino_app/data/response/movie_image.dart';
-import 'package:kino_app/data/response/movie_response.dart';
-import 'package:kino_app/data/response/person_detail.dart';
-import 'package:kino_app/data/response/person_response.dart';
-import 'package:kino_app/data/response/trailer_response.dart';
-import 'package:retrofit/http.dart';
+
+import '../response/trailer_response.dart';
+import '../response/person_response.dart';
+import '../response/movie_response.dart';
+import '../response/genre_response.dart';
+import '../response/cast_response.dart';
+import '../response/person_detail.dart';
+import '../response/movie_detail.dart';
+import '../response/movie_image.dart';
+import '../data.dart';
 
 part 'api_client.g.dart';
 
