@@ -1,6 +1,6 @@
 class MovieResponse {
-  List<Movie>? movies;
   int? totalPages;
+  List<Movie>? movies;
 
   MovieResponse({this.movies});
 
@@ -18,51 +18,47 @@ class MovieResponse {
 }
 
 class Movie {
-  final String? backdropPath;
   final int? id;
-  final String? originalLanguage;
-  final String? originalTitle;
-  final String? overview;
-  final num? popularity;
-  final String? posterPath;
-  final String? releaseDate;
-  final String? title;
   final bool? video;
+  final String? title;
   final int? voteCount;
+  final num? popularity;
+  final String? overview;
+  final String? posterPath;
   final String? voteAverage;
+  final String? releaseDate;
+  final String? backdropPath;
+  final String? originalTitle;
+  final String? originalLanguage;
 
   Movie({
-    this.backdropPath,
     this.id,
-    this.originalLanguage,
-    this.originalTitle,
+    this.title,
+    this.video,
     this.overview,
+    this.voteCount,
     this.popularity,
     this.posterPath,
     this.releaseDate,
-    this.title,
-    this.video,
-    this.voteCount,
     this.voteAverage,
+    this.backdropPath,
+    this.originalTitle,
+    this.originalLanguage,
   });
 
   factory Movie.fromJson(dynamic json) {
-    // if (json == null) {
-    //   return Movie();
-    // }
-
     return Movie(
-      backdropPath: json['backdrop_path'],
       id: json['id'],
-      originalLanguage: json['original_language'],
-      originalTitle: json['original_title'],
+      video: json['video'],
+      title: json['title'],
       overview: json['overview'],
+      voteCount: json['vote_count'],
       popularity: json['popularity'],
       posterPath: json['poster_path'],
       releaseDate: json['release_date'],
-      title: json['title'],
-      video: json['video'],
-      voteCount: json['vote_count'],
+      backdropPath: json['backdrop_path'],
+      originalTitle: json['original_title'],
+      originalLanguage: json['original_language'],
       voteAverage: json['vote_average'].toString(),
     );
   }

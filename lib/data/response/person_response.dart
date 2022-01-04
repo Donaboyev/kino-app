@@ -1,6 +1,6 @@
 class PersonResponse {
-  List<Person>? people;
   int? totalPages;
+  List<Person>? people;
 
   PersonResponse({this.totalPages, this.people});
 
@@ -19,33 +19,29 @@ class PersonResponse {
 
 class Person {
   final int? id;
-  final String? gender;
   final String? name;
+  final String? gender;
+  final String? popularity;
   final String? profilePath;
   final String? knowForDepartment;
-  final String? popularity;
 
   Person({
     this.id,
-    this.gender,
     this.name,
+    this.gender,
+    this.popularity,
     this.profilePath,
     this.knowForDepartment,
-    this.popularity,
   });
 
   factory Person.fromJson(dynamic json) {
-    // if (json == null) {
-    //   return Person();
-    // }
-
     return Person(
       id: json['id'],
-      gender: json['gender'].toString(),
       name: json['name'],
+      gender: json['gender'].toString(),
       profilePath: json['profile_path'],
-      knowForDepartment: json['known_for_department'],
       popularity: json['popularity'].toString(),
+      knowForDepartment: json['known_for_department'],
     );
   }
 }
