@@ -3,15 +3,15 @@ import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 
 class NutsActivityIndicator extends StatefulWidget {
+  final Duration animationDuration;
+  final double relativeWidth;
+  final Color inactiveColor;
+  final Color activeColor;
+  final double startRatio;
+  final double endRatio;
   final bool animating;
   final double radius;
   final int tickCount;
-  final Color activeColor;
-  final Color inactiveColor;
-  final Duration animationDuration;
-  final double relativeWidth;
-  final double startRatio;
-  final double endRatio;
 
   @override
   _NutsActivityIndicatorState createState() => _NutsActivityIndicatorState();
