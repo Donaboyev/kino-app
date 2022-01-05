@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import 'package:kino_app/controller/popular_more_controller.dart';
-import 'package:kino_app/data/remote/remote_source.dart';
-import 'package:kino_app/data/network/api_client.dart';
-import 'package:kino_app/data/repository/popular_more_repository.dart';
+
+import '../data/repository/popular_more_repository.dart';
+import '../controller/popular_more_controller.dart';
+import '../data/remote/remote_source.dart';
+import '../data/network/api_client.dart';
 
 class PopularMoreBinding implements Bindings {
   @override
