@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kino_app/base/base_controller.dart';
-import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/repository/top_rated_more_repository.dart';
-import 'package:kino_app/data/response/movie_response.dart';
+
+import '../data/repository/top_rated_more_repository.dart';
+import '../data/response/movie_response.dart';
+import '../core/constants/constants.dart';
+import '../base/base_controller.dart';
 
 class TopRatedMoreController extends BaseController {
-  final TopRatedMoreRepository repository;
-
   TopRatedMoreController({required this.repository});
 
-  ScrollController? scrollController;
-  int _topRatedPage = 1;
-  int? _totalTopRatedPage = 1;
-  bool _hasNextTopRated = true;
   final RxBool _isTopRatedLoading = false.obs;
+  final TopRatedMoreRepository repository;
   final List<Movie> _topRatedMovies = [];
+  ScrollController? scrollController;
+  bool _hasNextTopRated = true;
+  int? _totalTopRatedPage = 1;
+  int _topRatedPage = 1;
 
   @override
   void onInit() async {
     await getTopRatedMovies();
     scrollController = ScrollController();
-    scrollController!.addListener(() {
-      if (scrollController!.position.maxScrollExtent ==
-          scrollController!.position.pixels) getTopRatedMovies();
-    });
+    scrollController?.addListener(
+      () {
+        if (scrollController!.position.maxScrollExtent ==
+            scrollController!.position.pixels) getTopRatedMovies();
+      },
+    );
     super.onInit();
   }
 
   @override
   void dispose() {
-    scrollController!.dispose();
+    scrollController?.dispose();
     super.dispose();
   }
 
@@ -57,7 +59,7 @@ class TopRatedMoreController extends BaseController {
     }
   }
 
-  List<Movie> get topRatedMovies => _topRatedMovies;
-
   RxBool get isTopRatedLoading => _isTopRatedLoading;
+
+  List<Movie> get topRatedMovies => _topRatedMovies;
 }

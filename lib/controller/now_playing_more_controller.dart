@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kino_app/base/base_controller.dart';
-import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/repository/now_playing_more_repository.dart';
-import 'package:kino_app/data/response/movie_response.dart';
+
+import '../data/repository/now_playing_more_repository.dart';
+import '../data/response/movie_response.dart';
+import '../core/constants/constants.dart';
+import '../base/base_controller.dart';
 
 class NowPlayingMoreController extends BaseController {
-  final NowPlayingMoreRepository repository;
-
   NowPlayingMoreController({required this.repository});
 
-  ScrollController? scrollController;
-
-  final List<Movie> _nowPlayingMovies = [];
-  bool _hasNextNowPlaying = true;
   final RxBool _isNowPlayingLoading = false.obs;
-  int _nowPlayingPage = 1;
+  final NowPlayingMoreRepository repository;
+  final List<Movie> _nowPlayingMovies = [];
+  ScrollController? scrollController;
+  bool _hasNextNowPlaying = true;
   int? _totalNowPlayingPage = 1;
+  int _nowPlayingPage = 1;
 
   @override
   void onInit() async {
     await getNowPlayingMovies();
     scrollController = ScrollController();
-    scrollController!.addListener(() {
-      if (scrollController!.position.maxScrollExtent ==
-          scrollController!.position.pixels) getNowPlayingMovies();
-    });
+    scrollController?.addListener(
+      () {
+        if (scrollController!.position.maxScrollExtent ==
+            scrollController!.position.pixels) getNowPlayingMovies();
+      },
+    );
     super.onInit();
   }
 
   @override
   void dispose() {
-    scrollController!.dispose();
+    scrollController?.dispose();
     super.dispose();
   }
 
@@ -58,7 +59,7 @@ class NowPlayingMoreController extends BaseController {
     }
   }
 
-  List<Movie> get nowPlayingMovies => _nowPlayingMovies;
-
   RxBool get isNowPlayingLoading => _isNowPlayingLoading;
+
+  List<Movie> get nowPlayingMovies => _nowPlayingMovies;
 }

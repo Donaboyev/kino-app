@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kino_app/base/base_controller.dart';
-import 'package:kino_app/core/constants/constants.dart';
-import 'package:kino_app/data/repository/people_more_repository.dart';
-import 'package:kino_app/data/response/person_response.dart';
+
+import '../data/repository/people_more_repository.dart';
+import '../data/response/person_response.dart';
+import '../core/constants/constants.dart';
+import '../base/base_controller.dart';
 
 class PeopleMoreController extends BaseController {
-  final PeopleMoreRepository repository;
-
   PeopleMoreController({required this.repository});
 
+  final RxBool _isPeopleLoading = false.obs;
+  final PeopleMoreRepository repository;
   ScrollController? scrollController;
-
   final List<Person> _people = [];
+  bool _hasNextPeople = true;
   int? _totalPeoplePage = 1;
   int _peoplePage = 1;
-  bool _hasNextPeople = true;
-  final RxBool _isPeopleLoading = false.obs;
 
   @override
   void onInit() async {
     await getTrendingPeople();
     scrollController = ScrollController();
-    scrollController!.addListener(() {
-      if (scrollController!.position.maxScrollExtent ==
-          scrollController!.position.pixels) getTrendingPeople();
-    });
+    scrollController?.addListener(
+      () {
+        if (scrollController!.position.maxScrollExtent ==
+            scrollController!.position.pixels) getTrendingPeople();
+      },
+    );
     super.onInit();
   }
 
   @override
   void dispose() {
-    scrollController!.dispose();
+    scrollController?.dispose();
     super.dispose();
   }
 
@@ -58,7 +59,7 @@ class PeopleMoreController extends BaseController {
     }
   }
 
-  List<Person> get people => _people;
-
   RxBool get isPeopleLoading => _isPeopleLoading;
+
+  List<Person> get people => _people;
 }
