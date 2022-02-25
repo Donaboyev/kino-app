@@ -8,7 +8,7 @@ class PersonResponse {
     if (json['results'] != null) {
       people = <Person>[];
       json['results'].forEach((v) {
-        people!.add(new Person.fromJson(v));
+        people!.add(Person.fromJson(v));
       });
     } else {
       people = [];

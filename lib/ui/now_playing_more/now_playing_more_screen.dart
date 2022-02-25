@@ -5,6 +5,8 @@ import '../widgets/more_movie_item_widget.dart';
 import '../ui.dart';
 
 class NowPlayingMorePage extends GetView<NowPlayingMoreController> {
+  const NowPlayingMorePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +14,7 @@ class NowPlayingMorePage extends GetView<NowPlayingMoreController> {
       body: SafeArea(
         child: GetBuilder<NowPlayingMoreController>(
           builder: (moreController) => moreController.isLoading.value
-              ? const Center(child: const NutsActivityIndicator())
+              ? const Center(child: NutsActivityIndicator())
               : Stack(
                   children: [
                     CustomScrollView(
@@ -48,10 +50,10 @@ class NowPlayingMorePage extends GetView<NowPlayingMoreController> {
                       () => Visibility(
                         visible: moreController.isNowPlayingLoading.value,
                         child: const Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: const Align(
+                          padding: EdgeInsets.only(bottom: 8.0),
+                          child: Align(
                             alignment: Alignment.bottomCenter,
-                            child: const NutsActivityIndicator(radius: 12),
+                            child: NutsActivityIndicator(radius: 12),
                           ),
                         ),
                       ),

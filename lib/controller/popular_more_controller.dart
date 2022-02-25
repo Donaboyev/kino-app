@@ -39,13 +39,14 @@ class PopularMoreController extends BaseController {
   Future<void> getPopularMovies() async {
     if (!_hasNexPopular) return;
 
-    if (_popularPage == 1)
+    if (_popularPage == 1) {
       setLoading(true);
-    else
+    } else {
       _isPopularLoading.value = true;
+    }
 
     final result = await repository.getPopularMovies(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _popularPage,
     );
     _isPopularLoading.value = false;
@@ -57,7 +58,7 @@ class PopularMoreController extends BaseController {
       _popularMovies.addAll(result.movies!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 

@@ -5,6 +5,8 @@ import 'item_widgets/movie_item_widget.dart';
 import '../../ui.dart';
 
 class DiscoverWidget extends StatelessWidget {
+  const DiscoverWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -12,8 +14,8 @@ class DiscoverWidget extends StatelessWidget {
         children: [
           const SizedBox(height: 12),
           homeController.isLoading.value
-              ? const Center(child: const NutsActivityIndicator())
-              : Container(
+              ? const Center(child: NutsActivityIndicator())
+              : SizedBox(
                   height: 300,
                   child: NotificationListener<ScrollNotification>(
                     onNotification: (scrollNotification) {
@@ -48,10 +50,10 @@ class DiscoverWidget extends StatelessWidget {
                           () => Visibility(
                             visible: homeController.isDiscoverLoading.value,
                             child: const Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: const Align(
+                              padding: EdgeInsets.only(right: 8.0),
+                              child: Align(
                                 alignment: Alignment.centerRight,
-                                child: const NutsActivityIndicator(radius: 12),
+                                child: NutsActivityIndicator(radius: 12),
                               ),
                             ),
                           ),

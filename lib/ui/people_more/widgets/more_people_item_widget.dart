@@ -21,7 +21,7 @@ class MorePeopleItemWidget extends StatelessWidget {
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      '${Constants.BIG_IMAGE_BASE_URL}${person!.profilePath}',
+                      '${Constants.bigImageBaseUrl}${person!.profilePath}',
                   imageBuilder: (context, imageProvider) {
                     return Container(
                       width: 140,
@@ -35,12 +35,12 @@ class MorePeopleItemWidget extends StatelessWidget {
                       ),
                     );
                   },
-                  placeholder: (context, url) => Container(
+                  placeholder: (context, url) => const SizedBox(
                     width: 140,
                     height: 140,
-                    child: const Center(child: const NutsActivityIndicator()),
+                    child: Center(child: NutsActivityIndicator()),
                   ),
-                  errorWidget: (context, url, error) => Container(
+                  errorWidget: (context, url, error) => SizedBox(
                     width: 140,
                     height: 140,
                     child: Image.asset('assets/images/png/no_image.png'),
@@ -53,13 +53,11 @@ class MorePeopleItemWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        child: Text(
-                          person!.name!.toUpperCase(),
-                          style: styMorePersonName,
-                          maxLines: 2,
-                          overflow: TextOverflow.fade,
-                        ),
+                      Text(
+                        person!.name!.toUpperCase(),
+                        style: styMorePersonName,
+                        maxLines: 2,
+                        overflow: TextOverflow.fade,
                       ),
                       Visibility(
                         visible: person!.knowForDepartment != null,
@@ -86,7 +84,7 @@ class MorePeopleItemWidget extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () =>
-                    Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: person!.id),
+                    Get.toNamed(AppRoutes.personDetail, arguments: person!.id),
               ),
             ),
           )

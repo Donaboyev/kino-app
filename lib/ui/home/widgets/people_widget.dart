@@ -6,21 +6,23 @@ import 'item_widgets/person_widget.dart';
 import '../../ui.dart';
 
 class PeopleWidget extends StatelessWidget {
+  const PeopleWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CategoryTitleWidget(
           title: 'Popular people',
-          onTap: () => Get.toNamed(AppRoutes.PEOPLE_MORE),
+          onTap: () => Get.toNamed(AppRoutes.peopleMore),
         ),
         const SizedBox(height: 12),
         Column(
           children: [
             GetBuilder<HomeController>(
               builder: (homeController) => homeController.isLoading.value
-                  ? const Center(child: const NutsActivityIndicator())
-                  : Container(
+                  ? const Center(child: NutsActivityIndicator())
+                  : SizedBox(
                       height: 118,
                       child: NotificationListener<ScrollNotification>(
                         onNotification: (scrollNotification) {
@@ -55,11 +57,11 @@ class PeopleWidget extends StatelessWidget {
                               () => Visibility(
                                 visible: homeController.isPeopleLoading.value,
                                 child: const Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
-                                  child: const Align(
+                                  padding: EdgeInsets.only(right: 8.0),
+                                  child: Align(
                                     alignment: Alignment.centerRight,
                                     child:
-                                        const NutsActivityIndicator(radius: 12),
+                                        NutsActivityIndicator(radius: 12),
                                   ),
                                 ),
                               ),

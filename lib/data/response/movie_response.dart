@@ -8,7 +8,7 @@ class MovieResponse {
     if (json['results'] != null) {
       movies = <Movie>[];
       json['results'].forEach((v) {
-        movies!.add(new Movie.fromJson(v));
+        movies!.add(Movie.fromJson(v));
       });
     } else {
       movies = [];

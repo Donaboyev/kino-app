@@ -9,7 +9,7 @@ class Screenshot extends Equatable {
   final String? countryCode;
   final double? voteAverage;
 
-  Screenshot({
+  const Screenshot({
     this.width,
     this.aspect,
     this.height,

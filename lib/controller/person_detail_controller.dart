@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../data/repository/person_detail_repository.dart';
 import '../data/response/person_detail.dart';
 import '../core/constants/constants.dart';
@@ -19,7 +21,7 @@ class PersonDetailController extends BaseController {
   Future<void> getPersonDetail() async {
     setLoading(true);
     final result = await repository.getPersonDetail(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       personId: _personId,
     );
     setLoading(false);
@@ -27,7 +29,7 @@ class PersonDetailController extends BaseController {
       _personDetail = result;
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 

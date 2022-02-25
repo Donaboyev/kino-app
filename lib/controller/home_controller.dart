@@ -69,25 +69,26 @@ class HomeController extends BaseController {
   Future<void> getUpcomingMovies() async {
     setLoading(true);
     final result = await repository.getUpcomingMovies(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
     );
     setLoading(false);
     if (result is MovieResponse) {
       _upcomingMovies.addAll(result.movies!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 
   Future<void> getTopRatedMovies() async {
     if (!_hasNextTopRated) return;
-    if (_topRatedPage == 1)
+    if (_topRatedPage == 1) {
       setLoading(true);
-    else
+    } else {
       _isTopRatedLoading.value = true;
+    }
     final result = await repository.getTopRatedMovies(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _topRatedPage,
     );
     _isTopRatedLoading.value = false;
@@ -99,18 +100,19 @@ class HomeController extends BaseController {
       _topRatedMovies.addAll(result.movies!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 
   Future<void> getPopularMovies() async {
     if (!_hasNexPopular) return;
-    if (_popularPage == 1)
+    if (_popularPage == 1) {
       setLoading(true);
-    else
+    } else {
       _isPopularLoading.value = true;
+    }
     final result = await repository.getPopularMovies(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _popularPage,
     );
     _isPopularLoading.value = false;
@@ -122,18 +124,19 @@ class HomeController extends BaseController {
       _popularMovies.addAll(result.movies!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 
   Future<void> getNowPlayingMovies() async {
     if (!_hasNextNowPlaying) return;
-    if (_nowPlayingPage == 1)
+    if (_nowPlayingPage == 1) {
       setLoading(true);
-    else
+    } else {
       _isNowPlayingLoading.value = true;
+    }
     final result = await repository.getNowPlayingMovies(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _nowPlayingPage,
     );
     _isNowPlayingLoading.value = false;
@@ -145,20 +148,20 @@ class HomeController extends BaseController {
       _nowPlayingMovies.addAll(result.movies!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 
   Future<void> getGenres() async {
     setLoading(true);
-    final result = await repository.getGenres(apiKey: Constants.API_KEY);
+    final result = await repository.getGenres(apiKey: Constants.apiKey);
     setLoading(false);
     if (result is GenreResponse) {
       _genres = result.genres;
       getMoviesByGenre();
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 
@@ -177,12 +180,13 @@ class HomeController extends BaseController {
 
   Future<void> getMoviesByGenre() async {
     if (!_hasNextDiscover) return;
-    if (_discoverPage == 1)
+    if (_discoverPage == 1) {
       setLoading(true);
-    else
+    } else {
       _isDiscoverLoading.value = true;
+    }
     final result = await repository.getMoviesByGenre(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _discoverPage,
       genreId: genres![_selectedGenreIndex.value].id,
     );
@@ -196,25 +200,26 @@ class HomeController extends BaseController {
       if (_isDiscoverScrollable) {
         scrollController!.animateTo(
           0,
-          duration: Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 1300),
           curve: Curves.easeOut,
         );
         _isDiscoverScrollable = false;
       }
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 
   Future<void> getTrendingPeople() async {
     if (!_hasNextPeople) return;
-    if (_peoplePage == 1)
+    if (_peoplePage == 1) {
       setLoading(true);
-    else
+    } else {
       _isPeopleLoading.value = true;
+    }
     final result = await repository.getTrendingPeople(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _peoplePage,
     );
     _isPeopleLoading.value = false;
@@ -226,7 +231,7 @@ class HomeController extends BaseController {
       _people.addAll(result.people!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 

@@ -16,8 +16,9 @@ class BaseFunctions {
   static String getBudget(int budget) {
     if (budget < 1000) return '$budget \$';
     if (budget > 999 && budget < 1000000) return '${budget ~/ 1000}K \$';
-    if (budget > 999999 && budget < 1000000000)
+    if (budget > 999999 && budget < 1000000000) {
       return '${budget ~/ 1000000}M \$';
+    }
     return '${budget ~/ 1000000000}B \$';
   }
 }

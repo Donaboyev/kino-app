@@ -8,7 +8,7 @@ class TrailerResponse {
     if (json['results'] != null) {
       trailers = <Trailer>[];
       json['results'].forEach((v) {
-        trailers!.add(new Trailer.fromJson(v));
+        trailers!.add(Trailer.fromJson(v));
       });
     } else {
       trailers = [];

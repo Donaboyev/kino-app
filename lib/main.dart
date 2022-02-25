@@ -11,8 +11,8 @@ import 'routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (Constants.RUNNING == Version.WAIT) await HomeBinding().dependencies();
-  runApp(MyApp());
+  if (Constants.running == Version.wait) await HomeBinding().dependencies();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,11 +22,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.INITIAL,
+      initialRoute: AppRoutes.initial,
       navigatorKey: ApiClient.alice.getNavigatorKey(),
       getPages: AppPages.pages,
       defaultTransition: Transition.zoom,
-      home: HomePage(),
+      transitionDuration: const Duration(milliseconds: 300),
+      home: const HomePage(),
     );
   }
 }

@@ -13,61 +13,55 @@ class PersonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          child: Column(
-            children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: ClipRRect(
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        '${Constants.SMALL_IMAGE_BASE_URL}${person!.profilePath}',
-                    imageBuilder: (context, imageProvider) {
-                      return Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                          ),
+        Column(
+          children: [
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: ClipRRect(
+                child: CachedNetworkImage(
+                  imageUrl:
+                      '${Constants.smallImageBaseUrl}${person!.profilePath}',
+                  imageBuilder: (context, imageProvider) {
+                    return Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
                         ),
-                      );
-                    },
-                    placeholder: (context, url) => Container(
-                      width: 80,
-                      height: 80,
-                      child: const Center(child: const NutsActivityIndicator()),
-                    ),
-                    errorWidget: (context, url, error) => Container(
-                      width: 80,
-                      height: 80,
-                      child: Image.asset('assets/images/png/no_image.png'),
-                    ),
+                      ),
+                    );
+                  },
+                  placeholder: (context, url) => const SizedBox(
+                    width: 80,
+                    height: 80,
+                    child: Center(child: NutsActivityIndicator()),
+                  ),
+                  errorWidget: (context, url, error) => SizedBox(
+                    width: 80,
+                    height: 80,
+                    child: Image.asset('assets/images/png/no_image.png'),
                   ),
                 ),
               ),
-              Container(
-                child: Center(
-                  child: Text(
-                    person!.name!,
-                    style: styPersonName,
-                  ),
-                ),
+            ),
+            Center(
+              child: Text(
+                person!.name!,
+                style: styPersonName,
               ),
-              Container(
-                child: Center(
-                  child: Text(
-                    person!.knowForDepartment!,
-                    style: styPersonKnownFor,
-                  ),
-                ),
+            ),
+            Center(
+              child: Text(
+                person!.knowForDepartment!,
+                style: styPersonKnownFor,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         Positioned.fill(
           child: Material(
@@ -75,7 +69,7 @@ class PersonWidget extends StatelessWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
               onTap: () =>
-                  Get.toNamed(AppRoutes.PERSON_DETAIL, arguments: person!.id),
+                  Get.toNamed(AppRoutes.personDetail, arguments: person!.id),
             ),
           ),
         )

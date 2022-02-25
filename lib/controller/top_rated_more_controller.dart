@@ -38,12 +38,13 @@ class TopRatedMoreController extends BaseController {
 
   Future<void> getTopRatedMovies() async {
     if (!_hasNextTopRated) return;
-    if (_topRatedPage == 1)
+    if (_topRatedPage == 1) {
       setLoading(true);
-    else
+    } else {
       _isTopRatedLoading.value = true;
+    }
     final result = await repository.getTopRatedMovies(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _topRatedPage,
     );
     _isTopRatedLoading.value = false;
@@ -55,7 +56,7 @@ class TopRatedMoreController extends BaseController {
       _topRatedMovies.addAll(result.movies!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 

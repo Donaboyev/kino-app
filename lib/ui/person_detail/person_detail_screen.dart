@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../ui.dart';
 
 class PersonDetailPage extends GetView<PersonDetailController> {
+  const PersonDetailPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final int? personId = Get.arguments;
@@ -28,22 +30,20 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                               child: ClipRRect(
                                 child: CachedNetworkImage(
                                   imageUrl:
-                                      '${Constants.ORIGINAL_IMAGE_BASE_URL}${detailController.person!.profilePath ?? ''}',
+                                      '${Constants.originalImageBaseUrl}${detailController.person!.profilePath ?? ''}',
                                   height: Get.height / 2,
                                   width: Get.width,
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) =>
                                       const NutsActivityIndicator(),
                                   errorWidget: (context, url, error) =>
-                                      Container(
-                                    child: Image.asset(
-                                      'assets/images/png/no_image.png',
-                                    ),
-                                  ),
+                                      Image.asset(
+                                        'assets/images/png/no_image.png',
+                                      ),
                                 ),
                                 borderRadius: const BorderRadius.only(
-                                  bottomLeft: const Radius.circular(30),
-                                  bottomRight: const Radius.circular(30),
+                                  bottomLeft: Radius.circular(30),
+                                  bottomRight: Radius.circular(30),
                                 ),
                               ),
                             ),
@@ -51,14 +51,14 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                           Container(
                             height: Get.height / 2,
                             decoration: const BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: const Radius.circular(30),
-                                bottomRight: const Radius.circular(30),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(30),
+                                bottomRight: Radius.circular(30),
                               ),
-                              gradient: const LinearGradient(
+                              gradient: LinearGradient(
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
-                                colors: const [clrOpacityBlack, clrTransparent],
+                                colors: [clrOpacityBlack, clrTransparent],
                               ),
                             ),
                             child: Column(
@@ -132,7 +132,7 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
-                                            Text(
+                                            const Text(
                                               'Place of birth',
                                               style: styVoteAverage,
                                             ),
@@ -155,11 +155,11 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                               Visibility(
                                 visible: detailController
                                     .person!.knownAs!.isNotEmpty,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
                                     horizontal: 12.0,
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'Also known as',
                                     style: styVoteAverage,
                                   ),
@@ -173,7 +173,7 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                               Visibility(
                                 visible: detailController
                                     .person!.knownAs!.isNotEmpty,
-                                child: Container(
+                                child: SizedBox(
                                   height: 36,
                                   child: ListView.separated(
                                     separatorBuilder: (context, index) =>
@@ -237,9 +237,9 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                       color: clrLittleTransparent,
                       child: InkResponse(
                         onTap: () => Get.back(),
-                        child: Padding(
-                          padding: const EdgeInsets.all(24),
-                          child: const Icon(
+                        child: const Padding(
+                          padding: EdgeInsets.all(24),
+                          child: Icon(
                             Icons.arrow_back_ios,
                             color: clrWhite,
                           ),

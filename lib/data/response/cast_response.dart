@@ -7,7 +7,7 @@ class CastResponse {
     if (json['cast'] != null) {
       casts = <Cast>[];
       json['cast'].forEach((v) {
-        casts!.add(new Cast.fromJson(v));
+        casts!.add(Cast.fromJson(v));
       });
     } else {
       casts = [];

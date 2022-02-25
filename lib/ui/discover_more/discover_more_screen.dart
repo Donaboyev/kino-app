@@ -5,6 +5,8 @@ import '../widgets/more_movie_item_widget.dart';
 import '../ui.dart';
 
 class DiscoverMorePage extends GetView<DiscoverMoreController> {
+  const DiscoverMorePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +14,7 @@ class DiscoverMorePage extends GetView<DiscoverMoreController> {
       body: SafeArea(
         child: GetBuilder<DiscoverMoreController>(
           builder: (moreController) => moreController.isLoading.value
-              ? const Center(child: const NutsActivityIndicator())
+              ? const Center(child: NutsActivityIndicator())
               : Stack(
                   children: [
                     CustomScrollView(
@@ -115,10 +117,10 @@ class DiscoverMorePage extends GetView<DiscoverMoreController> {
                       () => Visibility(
                         visible: moreController.isDiscoverLoading.value,
                         child: const Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: const Align(
+                          padding: EdgeInsets.only(bottom: 8.0),
+                          child: Align(
                             alignment: Alignment.bottomCenter,
-                            child: const NutsActivityIndicator(radius: 12),
+                            child: NutsActivityIndicator(radius: 12),
                           ),
                         ),
                       ),

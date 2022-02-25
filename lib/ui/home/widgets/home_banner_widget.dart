@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../../ui.dart';
 
 class HomeBannerWidget extends StatelessWidget {
+  const HomeBannerWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -19,28 +21,27 @@ class HomeBannerWidget extends StatelessWidget {
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      '${Constants.BIG_IMAGE_BASE_URL}${movie.backdropPath ?? movie.posterPath}',
+                      '${Constants.bigImageBaseUrl}${movie.backdropPath ?? movie.posterPath}',
                   height: Get.height / 3,
                   width: Get.width,
                   fit: movie.backdropPath != null
                       ? BoxFit.cover
                       : BoxFit.scaleDown,
                   placeholder: (context, url) => const NutsActivityIndicator(),
-                  errorWidget: (context, url, error) => Container(
-                      child: Image.asset('assets/images/png/no_image.png')),
+                  errorWidget: (context, url, error) => Image.asset('assets/images/png/no_image.png'),
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: const Radius.circular(12),
-                    bottomRight: const Radius.circular(12),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
                   ),
                   gradient: LinearGradient(
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
-                    colors: const [clrOpacityBlack, clrTransparent],
+                    colors: [clrOpacityBlack, clrTransparent],
                   ),
                 ),
               ),
@@ -62,7 +63,7 @@ class HomeBannerWidget extends StatelessWidget {
                   color: clrTransparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12),
-                    onTap: () => Get.toNamed(AppRoutes.MOVIE_DETAIL,
+                    onTap: () => Get.toNamed(AppRoutes.movieDetail,
                         arguments: movie.id),
                   ),
                 ),

@@ -10,7 +10,7 @@ class MovieImage extends Equatable {
 
   factory MovieImage.fromJson(Map<String, dynamic>? result) {
     if (result == null) {
-      return MovieImage();
+      return const MovieImage();
     }
 
     return MovieImage(

@@ -7,13 +7,15 @@ import 'widgets/cast_widget.dart';
 import '../ui.dart';
 
 class MovieDetailPage extends GetView<MovieDetailController> {
+  const MovieDetailPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final int? movieId = Get.arguments;
     controller.setMovieId(movieId);
     return GetBuilder<MovieDetailController>(
       builder: (detailController) => detailController.isLoading.value
-          ? const Center(child: const NutsActivityIndicator())
+          ? const Center(child: NutsActivityIndicator())
           : Scaffold(
               backgroundColor: clrAsset,
               body: Stack(
@@ -26,33 +28,31 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                           ClipRRect(
                             child: CachedNetworkImage(
                               imageUrl:
-                                  '${Constants.ORIGINAL_IMAGE_BASE_URL}${detailController.movieDetail!.backdropPath}',
+                                  '${Constants.originalImageBaseUrl}${detailController.movieDetail!.backdropPath}',
                               height: Get.height / 2,
                               width: Get.width,
                               fit: BoxFit.cover,
                               placeholder: (context, url) =>
                                   const NutsActivityIndicator(),
-                              errorWidget: (context, url, error) => Container(
-                                child: Image.asset(
-                                    'assets/images/png/no_image.png'),
-                              ),
+                              errorWidget: (context, url, error) => Image.asset(
+                                  'assets/images/png/no_image.png'),
                             ),
                             borderRadius: const BorderRadius.only(
-                              bottomLeft: const Radius.circular(30),
-                              bottomRight: const Radius.circular(30),
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30),
                             ),
                           ),
                           Container(
                             height: Get.height / 2,
                             decoration: const BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: const Radius.circular(30),
-                                bottomRight: const Radius.circular(30),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(30),
+                                bottomRight: Radius.circular(30),
                               ),
-                              gradient: const LinearGradient(
+                              gradient: LinearGradient(
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
-                                colors: const [clrOpacityBlack, clrTransparent],
+                                colors: [clrOpacityBlack, clrTransparent],
                               ),
                             ),
                             child: Column(
@@ -69,12 +69,13 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                             onTap: () async {
                                               final youtubeUrl =
                                                   'https://www.youtube.com/embed/${detailController.movieDetail!.trailerId}';
-                                              if (await canLaunch(youtubeUrl))
+                                              if (await canLaunch(youtubeUrl)) {
                                                 await launch(youtubeUrl);
+                                              }
                                             },
                                             child: const Padding(
-                                              padding: const EdgeInsets.all(24),
-                                              child: const Icon(
+                                              padding: EdgeInsets.all(24),
+                                              child: Icon(
                                                 Icons.play_circle_outline,
                                                 color: clrPink,
                                                 size: 56,
@@ -174,9 +175,9 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                 visible: detailController.movieDetail!
                                     .movieImage.backdrops!.isNotEmpty,
                                 child: const Padding(
-                                  padding: const EdgeInsets.symmetric(
+                                  padding: EdgeInsets.symmetric(
                                       horizontal: 12.0),
-                                  child: const Text(
+                                  child: Text(
                                     'Screenshots',
                                     style: styVoteAverage,
                                   ),
@@ -190,7 +191,7 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                               Visibility(
                                 visible: detailController.movieDetail!
                                     .movieImage.backdrops!.isNotEmpty,
-                                child: Container(
+                                child: SizedBox(
                                   height: 155,
                                   child: ListView.separated(
                                     separatorBuilder: (context, index) =>
@@ -215,10 +216,10 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                                           placeholder: (context, url) =>
                                               const Center(
                                             child:
-                                                const NutsActivityIndicator(),
+                                                NutsActivityIndicator(),
                                           ),
                                           imageUrl:
-                                              '${Constants.MEDIUM_IMAGE_BASE_URL}${image.imagePath}',
+                                              '${Constants.mediumImageBaseUrl}${image.imagePath}',
                                           fit: BoxFit.cover,
                                         ),
                                       );
@@ -228,15 +229,15 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                               ),
                               const SizedBox(height: 12),
                               const Padding(
-                                padding: const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                     horizontal: 12.0),
-                                child: const Text(
+                                child: Text(
                                   'Casts',
                                   style: styVoteAverage,
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              Container(
+                              SizedBox(
                                 height: 118,
                                 child: ListView.separated(
                                   scrollDirection: Axis.horizontal,
@@ -270,8 +271,8 @@ class MovieDetailPage extends GetView<MovieDetailController> {
                       child: InkResponse(
                         onTap: () => Get.back(),
                         child: const Padding(
-                          padding: const EdgeInsets.all(24),
-                          child: const Icon(
+                          padding: EdgeInsets.all(24),
+                          child: Icon(
                             Icons.arrow_back_ios,
                             color: clrWhite,
                           ),

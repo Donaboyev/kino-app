@@ -11,6 +11,8 @@ import 'widgets/people_widget.dart';
 import '../ui.dart';
 
 class HomePage extends GetView<HomeController> {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,14 +29,14 @@ class HomePage extends GetView<HomeController> {
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: GetBuilder<HomeController>(
                   builder: (homeController) => controller.isLoading.value
-                      ? Center(child: NutsActivityIndicator())
+                      ? const Center(child: NutsActivityIndicator())
                       : Column(
-                          children: [
+                          children: const [
                             HomeBannerWidget(),
                             GenresWidget(),
                             DiscoverWidget(),

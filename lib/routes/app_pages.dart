@@ -21,42 +21,42 @@ import 'app_routes.dart';
 class AppPages {
   static final pages = [
     GetPage(
-      name: AppRoutes.INITIAL,
+      name: AppRoutes.initial,
       page: () => HomePage(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: AppRoutes.MOVIE_DETAIL,
+      name: AppRoutes.movieDetail,
       page: () => MovieDetailPage(),
       binding: MovieDetailBinding(),
     ),
     GetPage(
-      name: AppRoutes.PERSON_DETAIL,
+      name: AppRoutes.personDetail,
       page: () => PersonDetailPage(),
       binding: PersonDetailBinding(),
     ),
     GetPage(
-      name: AppRoutes.DISCOVER_MORE,
+      name: AppRoutes.discoverMore,
       page: () => DiscoverMorePage(),
       binding: DiscoverMoreBinding(),
     ),
     GetPage(
-      name: AppRoutes.NOW_PLAYING_MORE,
+      name: AppRoutes.nowPlayingMore,
       page: () => NowPlayingMorePage(),
       binding: NowPlayingMoreBinding(),
     ),
     GetPage(
-      name: AppRoutes.POPULAR_MORE,
+      name: AppRoutes.popularMore,
       page: () => PopularMorePage(),
       binding: PopularMoreBinding(),
     ),
     GetPage(
-      name: AppRoutes.TOP_RATED_MORE,
+      name: AppRoutes.topRatedMore,
       page: () => TopRatedMorePage(),
       binding: TopRatedMoreBinding(),
     ),
     GetPage(
-      name: AppRoutes.PEOPLE_MORE,
+      name: AppRoutes.peopleMore,
       page: () => PeopleMorePage(),
       binding: PeopleMoreBinding(),
     ),

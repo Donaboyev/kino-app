@@ -20,7 +20,7 @@ class MovieItemWidget extends StatelessWidget {
             ClipRRect(
               child: CachedNetworkImage(
                 imageUrl:
-                    '${Constants.BIG_IMAGE_BASE_URL}${movie!.backdropPath ?? movie!.posterPath}',
+                    '${Constants.bigImageBaseUrl}${movie!.backdropPath ?? movie!.posterPath}',
                 imageBuilder: (context, imageProvider) {
                   return Container(
                     width: 180,
@@ -34,12 +34,12 @@ class MovieItemWidget extends StatelessWidget {
                     ),
                   );
                 },
-                placeholder: (context, url) => Container(
+                placeholder: (context, url) => const SizedBox(
                   width: 180,
                   height: 246,
-                  child: const Center(child: const NutsActivityIndicator()),
+                  child: Center(child: NutsActivityIndicator()),
                 ),
-                errorWidget: (context, url, error) => Container(
+                errorWidget: (context, url, error) => SizedBox(
                   width: 180,
                   height: 246,
                   child: Image.asset('assets/images/png/no_image.png'),
@@ -47,7 +47,7 @@ class MovieItemWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            Container(
+            SizedBox(
               width: 180,
               child: Text(
                 movie!.title!.toUpperCase(),
@@ -89,7 +89,7 @@ class MovieItemWidget extends StatelessWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
               onTap: () =>
-                  Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie!.id),
+                  Get.toNamed(AppRoutes.movieDetail, arguments: movie!.id),
             ),
           ),
         )

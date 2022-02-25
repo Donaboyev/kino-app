@@ -5,6 +5,8 @@ import 'item_widgets/category_title_widget.dart';
 import '../../ui.dart';
 
 class GenresWidget extends GetView<HomeController> {
+  const GenresWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -12,10 +14,10 @@ class GenresWidget extends GetView<HomeController> {
         children: [
           CategoryTitleWidget(
             title: 'Discover movies',
-            onTap: () => Get.toNamed(AppRoutes.DISCOVER_MORE),
+            onTap: () => Get.toNamed(AppRoutes.discoverMore),
           ),
           homeController.isLoading.value
-              ? const Center(child: const NutsActivityIndicator())
+              ? const Center(child: NutsActivityIndicator())
               : SizedBox(
                   height: 45,
                   child: Align(

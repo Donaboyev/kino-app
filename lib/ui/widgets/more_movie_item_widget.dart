@@ -22,7 +22,7 @@ class MoreMovieItemWidget extends StatelessWidget {
               ClipRRect(
                 child: CachedNetworkImage(
                   imageUrl:
-                      '${Constants.BIG_IMAGE_BASE_URL}${movie!.backdropPath ?? movie!.posterPath}',
+                      '${Constants.bigImageBaseUrl}${movie!.backdropPath ?? movie!.posterPath}',
                   imageBuilder: (context, imageProvider) {
                     return Container(
                       width: 140,
@@ -36,12 +36,12 @@ class MoreMovieItemWidget extends StatelessWidget {
                       ),
                     );
                   },
-                  placeholder: (context, url) => Container(
+                  placeholder: (context, url) => const SizedBox(
                     width: 140,
                     height: 200,
-                    child: const Center(child: const NutsActivityIndicator()),
+                    child: Center(child: NutsActivityIndicator()),
                   ),
-                  errorWidget: (context, url, error) => Container(
+                  errorWidget: (context, url, error) => SizedBox(
                     width: 140,
                     height: 200,
                     child: Image.asset('assets/images/png/no_image.png'),
@@ -54,13 +54,11 @@ class MoreMovieItemWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        child: Text(
-                          movie!.title!.toUpperCase(),
-                          style: styMovieTitle,
-                          maxLines: 2,
-                          overflow: TextOverflow.fade,
-                        ),
+                      Text(
+                        movie!.title!.toUpperCase(),
+                        style: styMovieTitle,
+                        maxLines: 2,
+                        overflow: TextOverflow.fade,
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 4),
@@ -110,7 +108,7 @@ class MoreMovieItemWidget extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () =>
-                    Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie!.id),
+                    Get.toNamed(AppRoutes.movieDetail, arguments: movie!.id),
               ),
             ),
           )

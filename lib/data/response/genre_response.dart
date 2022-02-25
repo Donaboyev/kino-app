@@ -7,7 +7,7 @@ class GenreResponse {
     if (json['genres'] != null) {
       genres = <Genre>[];
       json['genres'].forEach((v) {
-        genres!.add(new Genre.fromJson(v));
+        genres!.add(Genre.fromJson(v));
       });
     } else {
       genres = [];

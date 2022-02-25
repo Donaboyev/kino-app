@@ -38,12 +38,13 @@ class PeopleMoreController extends BaseController {
 
   Future<void> getTrendingPeople() async {
     if (!_hasNextPeople) return;
-    if (_peoplePage == 1)
+    if (_peoplePage == 1) {
       setLoading(true);
-    else
+    } else {
       _isPeopleLoading.value = true;
+    }
     final result = await repository.getTrendingPeople(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _peoplePage,
     );
     _isPeopleLoading.value = false;
@@ -55,7 +56,7 @@ class PeopleMoreController extends BaseController {
       _people.addAll(result.people!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 

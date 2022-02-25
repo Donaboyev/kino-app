@@ -1,13 +1,13 @@
 import 'version_enum.dart';
 
 class Constants {
-  static const BASE_URL = 'https://api.themoviedb.org/3/';
-  static const API_KEY = 'YOUR_API_KEY';
-  static const VERSION = String.fromEnvironment('VERSION');
-  static const Version RUNNING =
-      VERSION == 'lazy' ? Version.LAZY : Version.WAIT;
-  static const BIG_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w780/';
-  static const SMALL_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w200';
-  static const ORIGINAL_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original/';
-  static const MEDIUM_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+  static const baseUrl = 'https://api.themoviedb.org/3/';
+  static const apiKey = 'YOUR_API_KEY';
+  static const version = String.fromEnvironment('VERSION');
+  static const Version running =
+      version == 'lazy' ? Version.lazy : Version.wait;
+  static const bigImageBaseUrl = 'https://image.tmdb.org/t/p/w780/';
+  static const smallImageBaseUrl = 'https://image.tmdb.org/t/p/w200';
+  static const originalImageBaseUrl = 'https://image.tmdb.org/t/p/original/';
+  static const mediumImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 }

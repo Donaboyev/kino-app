@@ -43,14 +43,14 @@ class DiscoverMoreController extends BaseController {
 
   Future<void> getGenres() async {
     setLoading(true);
-    final result = await repository.getGenres(apiKey: Constants.API_KEY);
+    final result = await repository.getGenres(apiKey: Constants.apiKey);
     setLoading(false);
     if (result is GenreResponse) {
       _genres = result.genres;
       getMoviesByGenre();
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 
@@ -69,12 +69,13 @@ class DiscoverMoreController extends BaseController {
 
   Future<void> getMoviesByGenre() async {
     if (!_hasNextDiscover) return;
-    if (_discoverPage == 1)
+    if (_discoverPage == 1) {
       setLoading(true);
-    else
+    } else {
       _isDiscoverLoading.value = true;
+    }
     final result = await repository.getMoviesByGenre(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _discoverPage,
       genreId: genres![_selectedGenreIndex.value].id,
     );
@@ -88,14 +89,14 @@ class DiscoverMoreController extends BaseController {
       if (_isDiscoverScrollable) {
         scrollController!.animateTo(
           0,
-          duration: Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 1300),
           curve: Curves.easeOut,
         );
         _isDiscoverScrollable = false;
       }
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 

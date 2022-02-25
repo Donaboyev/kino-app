@@ -15,7 +15,7 @@ import '../data.dart';
 
 part 'api_client.g.dart';
 
-@RestApi(baseUrl: Constants.BASE_URL)
+@RestApi(baseUrl: Constants.baseUrl)
 abstract class ApiClient {
   static Alice alice = Alice(
     showNotification: true,
@@ -38,10 +38,10 @@ abstract class ApiClient {
 
   static ApiClient? _apiClient;
 
-  static ApiClient? getInstance({String baseUrl = Constants.BASE_URL}) {
-    if (_apiClient != null)
+  static ApiClient? getInstance({String baseUrl = Constants.baseUrl}) {
+    if (_apiClient != null) {
       return _apiClient;
-    else {
+    } else {
       _apiClient = ApiClient(getDio, baseUrl);
       return _apiClient;
     }

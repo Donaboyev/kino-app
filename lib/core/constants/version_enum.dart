@@ -1,4 +1,1 @@
-enum Version {
-  LAZY,
-  WAIT,
-}
+enum Version { lazy, wait }

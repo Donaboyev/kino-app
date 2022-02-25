@@ -38,12 +38,13 @@ class NowPlayingMoreController extends BaseController {
 
   Future<void> getNowPlayingMovies() async {
     if (!_hasNextNowPlaying) return;
-    if (_nowPlayingPage == 1)
+    if (_nowPlayingPage == 1) {
       setLoading(true);
-    else
+    } else {
       _isNowPlayingLoading.value = true;
+    }
     final result = await repository.getNowPlayingMovies(
-      apiKey: Constants.API_KEY,
+      apiKey: Constants.apiKey,
       page: _nowPlayingPage,
     );
     _isNowPlayingLoading.value = false;
@@ -55,7 +56,7 @@ class NowPlayingMoreController extends BaseController {
       _nowPlayingMovies.addAll(result.movies!);
       update();
     } else {
-      print('===================> error: $result');
+      debugPrint('===================> error: $result');
     }
   }
 
