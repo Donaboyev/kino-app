@@ -1,43 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../data/repository/discover_more_repository.dart';
-import '../data/response/genre_response.dart';
-import '../data/response/movie_response.dart';
-import '../core/constants/constants.dart';
-import '../base/base_controller.dart';
+import 'package:kino_app/base/base_controller.dart';
+import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/data/repository/discover_more_repository.dart';
+import 'package:kino_app/data/response/genre_response.dart';
+import 'package:kino_app/data/response/movie_response.dart';
 
 class DiscoverMoreController extends BaseController {
+  final DiscoverMoreRepository repository;
+
   DiscoverMoreController({required this.repository});
 
-  final RxBool _isDiscoverLoading = false.obs;
-  final DiscoverMoreRepository repository;
-  final RxInt _selectedGenreIndex = 0.obs;
+  List<Genre>? _genres = [];
   final List<Movie> _moviesByGenre = [];
+  final RxInt _selectedGenreIndex = 0.obs;
+  bool _hasNextDiscover = true;
+  final RxBool _isDiscoverLoading = false.obs;
+  int _discoverPage = 1;
+  int? _totalDiscoverPage = 1;
+  ScrollController? scrollController;
   bool _isAnotherGenreClicked = false;
   bool _isDiscoverScrollable = false;
-  ScrollController? scrollController;
-  bool _hasNextDiscover = true;
-  int? _totalDiscoverPage = 1;
-  List<Genre>? _genres = [];
-  int _discoverPage = 1;
 
   @override
   void onInit() async {
     await getGenres();
     scrollController = ScrollController();
-    scrollController?.addListener(
-      () {
-        if (scrollController!.position.maxScrollExtent ==
-            scrollController!.position.pixels) getMoviesByGenre();
-      },
-    );
+    scrollController!.addListener(() {
+      if (scrollController!.position.maxScrollExtent ==
+          scrollController!.position.pixels) getMoviesByGenre();
+    });
     super.onInit();
   }
 
   @override
   void dispose() {
-    scrollController?.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -50,7 +48,7 @@ class DiscoverMoreController extends BaseController {
       getMoviesByGenre();
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -96,7 +94,7 @@ class DiscoverMoreController extends BaseController {
       }
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 

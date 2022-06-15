@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../ui.dart';
+import 'package:kino_app/base/base_functions.dart';
+import 'package:kino_app/controller/person_detail_controller.dart';
+import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
+import 'package:kino_app/core/theme/app_colors.dart';
+import 'package:kino_app/core/theme/text_styles.dart';
 
 class PersonDetailPage extends GetView<PersonDetailController> {
   const PersonDetailPage({Key? key}) : super(key: key);
@@ -38,8 +42,8 @@ class PersonDetailPage extends GetView<PersonDetailController> {
                                       const NutsActivityIndicator(),
                                   errorWidget: (context, url, error) =>
                                       Image.asset(
-                                        'assets/images/png/no_image.png',
-                                      ),
+                                    'assets/images/png/no_image.png',
+                                  ),
                                 ),
                                 borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(30),

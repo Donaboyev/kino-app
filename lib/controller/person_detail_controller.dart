@@ -1,19 +1,17 @@
-import 'package:flutter/material.dart';
-
-import '../data/repository/person_detail_repository.dart';
-import '../data/response/person_detail.dart';
-import '../core/constants/constants.dart';
-import '../base/base_controller.dart';
+import 'package:kino_app/base/base_controller.dart';
+import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/data/repository/person_detail_repository.dart';
+import 'package:kino_app/data/response/person_detail.dart';
 
 class PersonDetailController extends BaseController {
+  final PersonDetailRepository repository;
 
   PersonDetailController({required this.repository});
 
-  final PersonDetailRepository repository;
   PersonDetail? _personDetail;
   int? _personId;
 
-  Future<void> setPersonId(int? value) async {
+  void setPersonId(int? value) async {
     _personId = value;
     await getPersonDetail();
   }
@@ -29,7 +27,7 @@ class PersonDetailController extends BaseController {
       _personDetail = result;
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 

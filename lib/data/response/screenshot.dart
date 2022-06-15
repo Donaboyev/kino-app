@@ -1,44 +1,44 @@
 import 'package:equatable/equatable.dart';
 
 class Screenshot extends Equatable {
-  final int? width;
-  final int? height;
-  final int? voteCount;
   final String? aspect;
   final String? imagePath;
+  final int? height;
+  final int? width;
   final String? countryCode;
   final double? voteAverage;
+  final int? voteCount;
 
   const Screenshot({
-    this.width,
     this.aspect,
-    this.height,
     this.imagePath,
-    this.voteCount,
+    this.height,
+    this.width,
     this.countryCode,
     this.voteAverage,
+    this.voteCount,
   });
 
   factory Screenshot.fromJson(Map<String, dynamic> json) {
     return Screenshot(
-      width: json['width'],
-      height: json['height'],
+      aspect: json['aspect_ratio'].toString(),
       imagePath: json['file_path'],
-      voteCount: json['vote_count'],
+      height: json['height'],
+      width: json['width'],
       countryCode: json['iso_639_1'],
       voteAverage: json['vote_average'],
-      aspect: json['aspect_ratio'].toString(),
+      voteCount: json['vote_count'],
     );
   }
 
   @override
   List<Object?> get props => [
-        width,
         aspect,
-        height,
         imagePath,
-        voteCount,
+        height,
+        width,
         countryCode,
         voteAverage,
+        voteCount,
       ];
 }

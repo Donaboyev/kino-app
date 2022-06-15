@@ -1,16 +1,14 @@
-import 'package:flutter/material.dart';
-
-import '../response/trailer_response.dart';
-import '../response/person_response.dart';
-import '../response/genre_response.dart';
-import '../response/movie_response.dart';
-import '../response/person_detail.dart';
-import '../response/cast_response.dart';
-import '../response/movie_detail.dart';
-import '../response/movie_image.dart';
-import '../network/api_client.dart';
-import 'response_handler.dart';
-import 'server_error.dart';
+import 'package:kino_app/data/network/api_client.dart';
+import 'package:kino_app/data/remote/response_handler.dart';
+import 'package:kino_app/data/remote/server_error.dart';
+import 'package:kino_app/data/response/cast_response.dart';
+import 'package:kino_app/data/response/genre_response.dart';
+import 'package:kino_app/data/response/movie_detail.dart';
+import 'package:kino_app/data/response/movie_image.dart';
+import 'package:kino_app/data/response/movie_response.dart';
+import 'package:kino_app/data/response/person_detail.dart';
+import 'package:kino_app/data/response/person_response.dart';
+import 'package:kino_app/data/response/trailer_response.dart';
 
 class RemoteSource {
   ApiClient apiClient;
@@ -23,7 +21,7 @@ class RemoteSource {
     try {
       response = await apiClient.getUpcomingMovies(apiKey);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -39,7 +37,7 @@ class RemoteSource {
     try {
       response = await apiClient.getNowPlayingMovies(apiKey, page);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -55,7 +53,7 @@ class RemoteSource {
     try {
       response = await apiClient.getTopRatedMovies(apiKey, page);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -71,7 +69,7 @@ class RemoteSource {
     try {
       response = await apiClient.getPopularMovies(apiKey, page);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -79,16 +77,15 @@ class RemoteSource {
     return ResponseHandler()..data = response;
   }
 
-  Future<ResponseHandler<MovieResponse>> getMoviesByGenre({
-    required int? genreId,
-    required String apiKey,
-    required int page,
-  }) async {
+  Future<ResponseHandler<MovieResponse>> getMoviesByGenre(
+      {required int? genreId,
+      required String apiKey,
+      required int page}) async {
     MovieResponse response;
     try {
       response = await apiClient.getMoviesByGenre(genreId, page, apiKey);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -102,7 +99,7 @@ class RemoteSource {
     try {
       response = await apiClient.getGenres(apiKey);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -116,7 +113,7 @@ class RemoteSource {
     try {
       response = await apiClient.getTrendingPeople(apiKey, page);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -130,7 +127,7 @@ class RemoteSource {
     try {
       movieDetail = await apiClient.getMovieDetail(movieId, apiKey);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -144,7 +141,7 @@ class RemoteSource {
     try {
       response = await apiClient.getTrailerId(movieId, apiKey);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -158,7 +155,7 @@ class RemoteSource {
     try {
       movieImage = await apiClient.getMovieImage(movieId, apiKey);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -172,7 +169,7 @@ class RemoteSource {
     try {
       casts = await apiClient.getCastList(movieId, apiKey);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));
@@ -186,7 +183,7 @@ class RemoteSource {
     try {
       response = await apiClient.getPersonDetail(personId, apiKey);
     } catch (error, stacktrace) {
-      debugPrint(
+      print(
           'Exceptions occurred getNowPlayingMovies: $error stacktrace: $stacktrace');
       return ResponseHandler()
         ..setException(ServerError.withError(error: error));

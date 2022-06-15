@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
-
-import '../data/repository/movie_detail_repository.dart';
-import '../data/response/trailer_response.dart';
-import '../data/response/cast_response.dart';
-import '../data/response/movie_detail.dart';
-import '../data/response/movie_image.dart';
-import '../core/constants/constants.dart';
-import '../base/base_controller.dart';
+import 'package:kino_app/base/base_controller.dart';
+import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/data/repository/movie_detail_repository.dart';
+import 'package:kino_app/data/response/cast_response.dart';
+import 'package:kino_app/data/response/movie_detail.dart';
+import 'package:kino_app/data/response/movie_image.dart';
+import 'package:kino_app/data/response/trailer_response.dart';
 
 class MovieDetailController extends BaseController {
+  final MovieDetailRepository repository;
+
   MovieDetailController({required this.repository});
 
-  final MovieDetailRepository repository;
   MovieDetail? _movieDetail;
   int? movieId;
 
@@ -34,7 +33,7 @@ class MovieDetailController extends BaseController {
       _movieDetail = result;
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -49,7 +48,7 @@ class MovieDetailController extends BaseController {
       _movieDetail!.movieImage = result;
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -66,7 +65,7 @@ class MovieDetailController extends BaseController {
       }
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -81,7 +80,7 @@ class MovieDetailController extends BaseController {
       _movieDetail!.castList = result.casts;
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 

@@ -1,40 +1,41 @@
 class PersonDetail {
   final int? id;
   final bool? adult;
-  final String? name;
-  final String? birthday;
-  final String? biography;
-  final String? profilePath;
-  final String? placeOfBirth;
   final List<String>? knownAs;
+  final String? biography;
+  final String? birthday;
   final String? knownForDepartment;
+  final String? name;
+  final String? placeOfBirth;
+  final String? profilePath;
 
   PersonDetail({
-    this.id,
-    this.name,
     this.adult,
     this.knownAs,
-    this.birthday,
     this.biography,
-    this.profilePath,
-    this.placeOfBirth,
+    this.birthday,
     this.knownForDepartment,
+    this.name,
+    this.placeOfBirth,
+    this.profilePath,
+    this.id,
   });
 
   factory PersonDetail.fromJson(dynamic json) {
     if (json == null) {
       return PersonDetail();
     }
+
     return PersonDetail(
       id: json['id'],
-      name: json['name'],
       adult: json['adult'],
-      birthday: json['birthday'],
-      biography: json['biography'],
-      profilePath: json['profile_path'],
-      placeOfBirth: json['place_of_birth'],
       knownAs: json['also_known_as'].cast<String>(),
+      biography: json['biography'],
+      birthday: json['birthday'],
       knownForDepartment: json['known_for_department'],
+      name: json['name'],
+      placeOfBirth: json['place_of_birth'],
+      profilePath: json['profile_path'],
     );
   }
 }

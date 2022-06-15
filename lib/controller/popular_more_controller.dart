@@ -1,38 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../data/repository/popular_more_repository.dart';
-import '../data/response/movie_response.dart';
-import '../core/constants/constants.dart';
-import '../base/base_controller.dart';
+import 'package:kino_app/base/base_controller.dart';
+import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/data/repository/popular_more_repository.dart';
+import 'package:kino_app/data/response/movie_response.dart';
 
 class PopularMoreController extends BaseController {
+  final PopularMoreRepository repository;
+
   PopularMoreController({required this.repository});
 
-  final RxBool _isPopularLoading = false.obs;
-  final PopularMoreRepository repository;
-  final List<Movie> _popularMovies = [];
   ScrollController? scrollController;
-  bool _hasNexPopular = true;
-  int? _totalPopularPage = 1;
+
   int _popularPage = 1;
+  int? _totalPopularPage = 1;
+  bool _hasNexPopular = true;
+  final RxBool _isPopularLoading = false.obs;
+  final List<Movie> _popularMovies = [];
 
   @override
   void onInit() async {
     await getPopularMovies();
     scrollController = ScrollController();
-    scrollController?.addListener(
-      () {
-        if (scrollController!.position.maxScrollExtent ==
-            scrollController!.position.pixels) getPopularMovies();
-      },
-    );
+    scrollController!.addListener(() {
+      if (scrollController!.position.maxScrollExtent ==
+          scrollController!.position.pixels) getPopularMovies();
+    });
     super.onInit();
   }
 
   @override
   void dispose() {
-    scrollController?.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -58,11 +57,11 @@ class PopularMoreController extends BaseController {
       _popularMovies.addAll(result.movies!);
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
-  RxBool get isPopularLoading => _isPopularLoading;
-
   List<Movie> get popularMovies => _popularMovies;
+
+  RxBool get isPopularLoading => _isPopularLoading;
 }

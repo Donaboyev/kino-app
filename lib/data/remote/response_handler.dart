@@ -1,4 +1,4 @@
-import 'server_error.dart';
+import 'package:kino_app/data/remote/server_error.dart';
 
 class ResponseHandler<T> {
   ServerError? _error;

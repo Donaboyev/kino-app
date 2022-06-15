@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../ui.dart';
+import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
+import 'package:kino_app/core/theme/app_colors.dart';
+import 'package:kino_app/core/theme/text_styles.dart';
+import 'package:kino_app/data/response/person_response.dart';
+import 'package:kino_app/routes/app_routes.dart';
 
 class PersonWidget extends StatelessWidget {
   final Person? person;

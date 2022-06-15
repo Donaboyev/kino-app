@@ -1,52 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../data/repository/home_repository.dart';
-import '../data/response/person_response.dart';
-import '../data/response/movie_response.dart';
-import '../data/response/genre_response.dart';
-import '../core/constants/constants.dart';
-import '../base/base_controller.dart';
+import 'package:kino_app/base/base_controller.dart';
+import 'package:kino_app/core/constants/constants.dart';
+import 'package:kino_app/data/repository/home_repository.dart';
+import 'package:kino_app/data/response/genre_response.dart';
+import 'package:kino_app/data/response/movie_response.dart';
+import 'package:kino_app/data/response/person_response.dart';
 
 class HomeController extends BaseController {
+  final HomeRepository repository;
+
   HomeController({required this.repository});
 
-  final RxBool _isDiscoverLoading = false.obs;
-  final RxInt _selectedGenreIndex = 0.obs;
   final List<Movie> _upcomingMovies = [];
+
+  List<Genre>? _genres = [];
   final List<Movie> _moviesByGenre = [];
+  final RxInt _selectedGenreIndex = 0.obs;
+  bool _hasNextDiscover = true;
+  final RxBool _isDiscoverLoading = false.obs;
+  int _discoverPage = 1;
+  int? _totalDiscoverPage = 1;
+  ScrollController? scrollController;
   bool _isAnotherGenreClicked = false;
   bool _isDiscoverScrollable = false;
-  ScrollController? scrollController;
-  final HomeRepository repository;
-  bool _hasNextDiscover = true;
-  int? _totalDiscoverPage = 1;
-  List<Genre>? _genres = [];
-  int _discoverPage = 1;
 
-  final RxBool _isNowPlayingLoading = false.obs;
   final List<Movie> _nowPlayingMovies = [];
   bool _hasNextNowPlaying = true;
-  int? _totalNowPlayingPage = 1;
+  final RxBool _isNowPlayingLoading = false.obs;
   int _nowPlayingPage = 1;
+  int? _totalNowPlayingPage = 1;
 
-  final RxBool _isPeopleLoading = false.obs;
   final List<Person> _people = [];
-  bool _hasNextPeople = true;
   int? _totalPeoplePage = 1;
   int _peoplePage = 1;
+  bool _hasNextPeople = true;
+  final RxBool _isPeopleLoading = false.obs;
 
+  int _topRatedPage = 1;
+  int? _totalTopRatedPage = 1;
+  bool _hasNextTopRated = true;
   final RxBool _isTopRatedLoading = false.obs;
   final List<Movie> _topRatedMovies = [];
-  bool _hasNextTopRated = true;
-  int? _totalTopRatedPage = 1;
-  int _topRatedPage = 1;
 
+  int _popularPage = 1;
+  int? _totalPopularPage = 1;
+  bool _hasNexPopular = true;
   final RxBool _isPopularLoading = false.obs;
   final List<Movie> _popularMovies = [];
-  bool _hasNexPopular = true;
-  int? _totalPopularPage = 1;
-  int _popularPage = 1;
 
   @override
   void onInit() async {
@@ -62,21 +63,20 @@ class HomeController extends BaseController {
 
   @override
   void dispose() {
-    scrollController?.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
   Future<void> getUpcomingMovies() async {
     setLoading(true);
-    final result = await repository.getUpcomingMovies(
-      apiKey: Constants.apiKey,
-    );
+    final result =
+        await repository.getUpcomingMovies(apiKey: Constants.apiKey);
     setLoading(false);
     if (result is MovieResponse) {
       _upcomingMovies.addAll(result.movies!);
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -100,7 +100,7 @@ class HomeController extends BaseController {
       _topRatedMovies.addAll(result.movies!);
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -124,7 +124,7 @@ class HomeController extends BaseController {
       _popularMovies.addAll(result.movies!);
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -148,7 +148,7 @@ class HomeController extends BaseController {
       _nowPlayingMovies.addAll(result.movies!);
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -161,7 +161,7 @@ class HomeController extends BaseController {
       getMoviesByGenre();
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -207,7 +207,7 @@ class HomeController extends BaseController {
       }
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
@@ -231,33 +231,33 @@ class HomeController extends BaseController {
       _people.addAll(result.people!);
       update();
     } else {
-      debugPrint('===================> error: $result');
+      print('===================> error: $result');
     }
   }
 
-  RxBool get isNowPlayingLoading => _isNowPlayingLoading;
-
-  List<Movie> get nowPlayingMovies => _nowPlayingMovies;
-
-  RxInt get selectedGenreIndex => _selectedGenreIndex;
-
-  RxBool get isDiscoverLoading => _isDiscoverLoading;
-
-  RxBool get isTopRatedLoading => _isTopRatedLoading;
-
   List<Movie> get upcomingMovies => _upcomingMovies;
-
-  List<Movie> get topRatedMovies => _topRatedMovies;
-
-  RxBool get isPopularLoading => _isPopularLoading;
-
-  List<Movie> get popularMovies => _popularMovies;
-
-  List<Movie> get moviesByGenre => _moviesByGenre;
-
-  RxBool get isPeopleLoading => _isPeopleLoading;
 
   List<Genre>? get genres => _genres;
 
   List<Person> get people => _people;
+
+  RxBool get isPeopleLoading => _isPeopleLoading;
+
+  List<Movie> get topRatedMovies => _topRatedMovies;
+
+  RxBool get isTopRatedLoading => _isTopRatedLoading;
+
+  List<Movie> get popularMovies => _popularMovies;
+
+  RxBool get isPopularLoading => _isPopularLoading;
+
+  List<Movie> get nowPlayingMovies => _nowPlayingMovies;
+
+  RxBool get isNowPlayingLoading => _isNowPlayingLoading;
+
+  List<Movie> get moviesByGenre => _moviesByGenre;
+
+  RxBool get isDiscoverLoading => _isDiscoverLoading;
+
+  RxInt get selectedGenreIndex => _selectedGenreIndex;
 }

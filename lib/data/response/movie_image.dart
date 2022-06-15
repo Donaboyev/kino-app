@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
-
-import 'screenshot.dart';
+import 'package:kino_app/data/response/screenshot.dart';
 
 class MovieImage extends Equatable {
-  final List<Screenshot>? posters;
   final List<Screenshot>? backdrops;
+  final List<Screenshot>? posters;
 
   const MovieImage({this.backdrops, this.posters});
 

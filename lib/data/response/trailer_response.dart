@@ -1,6 +1,6 @@
 class TrailerResponse {
-  int? id;
   List<Trailer>? trailers;
+  int? id;
 
   TrailerResponse({this.trailers, this.id});
 
@@ -18,41 +18,41 @@ class TrailerResponse {
 }
 
 class Trailer {
-  final int? size;
-  final String? id;
-  final String? key;
-  final String? name;
-  final String? site;
-  final String? type;
-  final bool? official;
   final String? iso6391;
   final String? iso31661;
+  final String? name;
+  final String? key;
+  final String? site;
+  final int? size;
+  final String? type;
+  final bool? official;
   final String? publishedAt;
+  final String? id;
 
   Trailer({
-    this.id,
+    this.iso6391,
+    this.iso31661,
     this.key,
     this.site,
     this.size,
     this.type,
-    this.name,
-    this.iso6391,
-    this.iso31661,
     this.official,
     this.publishedAt,
+    this.id,
+    this.name,
   });
 
   factory Trailer.fromJson(dynamic json) {
     return Trailer(
-      size: json['size'],
       id: json['id'].toString(),
-      official: json['official'],
+      iso6391: json['iso_639_1'].toString(),
+      name: json['name'].toString(),
+      iso31661: json['iso_3166_1'].toString(),
       key: json['key'].toString(),
       site: json['site'].toString(),
+      size: json['size'],
       type: json['type'].toString(),
-      name: json['name'].toString(),
-      iso6391: json['iso_639_1'].toString(),
-      iso31661: json['iso_3166_1'].toString(),
+      official: json['official'],
       publishedAt: json['published_at'].toString(),
     );
   }

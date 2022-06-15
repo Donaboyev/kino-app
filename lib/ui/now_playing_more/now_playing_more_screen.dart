@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../widgets/more_movie_item_widget.dart';
-import '../ui.dart';
+import 'package:kino_app/controller/now_playing_more_controller.dart';
+import 'package:kino_app/core/custom_widgets/nuts_activity_indicator.dart';
+import 'package:kino_app/core/theme/app_colors.dart';
+import 'package:kino_app/core/theme/text_styles.dart';
+import 'package:kino_app/data/response/movie_response.dart';
+import 'package:kino_app/ui/widgets/more_movie_item_widget.dart';
 
 class NowPlayingMorePage extends GetView<NowPlayingMoreController> {
   const NowPlayingMorePage({Key? key}) : super(key: key);

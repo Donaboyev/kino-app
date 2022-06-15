@@ -18,22 +18,22 @@ class CastResponse {
 class Cast {
   final int? id;
   final String? name;
-  final String? character;
   final String? profilePath;
+  final String? character;
 
   Cast({
     this.id,
     this.name,
-    this.character,
     this.profilePath,
+    this.character,
   });
 
   factory Cast.fromJson(dynamic json) {
     return Cast(
       id: json['id'],
       name: json['name'],
-      character: json['character'],
       profilePath: json['profile_path'],
+      character: json['character'],
     );
   }
 }

@@ -3,18 +3,15 @@ import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 
 class NutsActivityIndicator extends StatefulWidget {
-  final Duration animationDuration;
-  final double relativeWidth;
-  final Color inactiveColor;
-  final Color activeColor;
-  final double startRatio;
-  final double endRatio;
   final bool animating;
   final double radius;
   final int tickCount;
-
-  @override
-  _NutsActivityIndicatorState createState() => _NutsActivityIndicatorState();
+  final Color activeColor;
+  final Color inactiveColor;
+  final Duration animationDuration;
+  final double relativeWidth;
+  final double startRatio;
+  final double endRatio;
 
   const NutsActivityIndicator({
     Key? key,
@@ -28,6 +25,9 @@ class NutsActivityIndicator extends StatefulWidget {
     this.animationDuration = const Duration(seconds: 1),
     this.relativeWidth = 1,
   }) : super(key: key);
+
+  @override
+  _NutsActivityIndicatorState createState() => _NutsActivityIndicatorState();
 }
 
 class _NutsActivityIndicatorState extends State<NutsActivityIndicator>
@@ -86,16 +86,16 @@ class _NutsActivityIndicatorState extends State<NutsActivityIndicator>
 }
 
 class _NutsActivityIndicatorPainter extends CustomPainter {
-  final int tickCount;
-  final double radius;
-  final double endRatio;
-  final RRect _tickRRect;
-  final double startRatio;
   final int _halfTickCount;
+  final Animation<double>? animationController;
   final Color? activeColor;
   final Color? inactiveColor;
   final double relativeWidth;
-  final Animation<double>? animationController;
+  final int tickCount;
+  final double radius;
+  final RRect _tickRRect;
+  final double startRatio;
+  final double endRatio;
 
   _NutsActivityIndicatorPainter({
     required this.radius,

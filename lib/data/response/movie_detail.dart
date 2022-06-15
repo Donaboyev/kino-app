@@ -1,34 +1,34 @@
-import 'cast_response.dart';
-import 'movie_image.dart';
+import 'package:kino_app/data/response/cast_response.dart';
+import 'package:kino_app/data/response/movie_image.dart';
 
 class MovieDetail {
   final String? id;
-  String? trailerId;
-  final int? budget;
-  final int? runtime;
   final String? title;
-  List<Cast>? castList;
-  final String? homePage;
-  final String? overview;
-  final String? voteCount;
-  final String? voteAverage;
-  final String? releaseDate;
   final String? backdropPath;
+  final int? budget;
+  final String? homePage;
   final String? originalTitle;
+  final String? overview;
+  final String? releaseDate;
+  final int? runtime;
+  final String? voteAverage;
+  final String? voteCount;
+  String? trailerId;
   late MovieImage movieImage;
+  List<Cast>? castList;
 
   MovieDetail({
     this.id,
     this.title,
-    this.budget,
-    this.runtime,
-    this.homePage,
-    this.overview,
-    this.voteCount,
-    this.releaseDate,
-    this.voteAverage,
     this.backdropPath,
+    this.budget,
+    this.homePage,
     this.originalTitle,
+    this.overview,
+    this.releaseDate,
+    this.runtime,
+    this.voteAverage,
+    this.voteCount,
   });
 
   factory MovieDetail.fromJson(dynamic json) {
@@ -37,17 +37,17 @@ class MovieDetail {
     }
 
     return MovieDetail(
-      title: json['title'],
-      budget: json['budget'],
-      runtime: json['runtime'],
       id: json['id'].toString(),
-      overview: json['overview'],
-      homePage: json['home_page'],
-      releaseDate: json['release_date'],
+      title: json['title'],
       backdropPath: json['backdrop_path'],
+      budget: json['budget'],
+      homePage: json['home_page'],
       originalTitle: json['original_title'],
-      voteCount: json['vote_count'].toString(),
+      overview: json['overview'],
+      releaseDate: json['release_date'],
+      runtime: json['runtime'],
       voteAverage: json['vote_average'].toString(),
+      voteCount: json['vote_count'].toString(),
     );
   }
 }

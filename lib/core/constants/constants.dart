@@ -1,4 +1,4 @@
-import 'version_enum.dart';
+import 'package:kino_app/core/constants/version_enum.dart';
 
 class Constants {
   static const baseUrl = 'https://api.themoviedb.org/3/';
